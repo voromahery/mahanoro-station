@@ -1,22 +1,22 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { PlaceOption } from "../components";
 
-export default function PlaceOption() {
+export default function PlaceOptionContainer() {
   const places = ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"];
 
   return (
-    <>
-      <h1>Where are you going?</h1>
-      <ul>
+    <PlaceOption>
+      <PlaceOption.Heading>Where are you going?</PlaceOption.Heading>
+      <PlaceOption.List>
         {places.map((place, index) => (
           <Link key={place[index]} to={`/nextTrip/${place}`}>
-            <li>
-              <button value={place}>{place}</button>
-            </li>
+            <PlaceOption.ListItem>
+              <PlaceOption.Button value={place}>{place}</PlaceOption.Button>
+            </PlaceOption.ListItem>
           </Link>
         ))}
-      </ul>
-    </>
+      </PlaceOption.List>
+    </PlaceOption>
   );
 }

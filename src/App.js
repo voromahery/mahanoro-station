@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Header from "./containers/HeaderContainer";
-import PlaceOption from "./pages/PlaceOption";
+import PlaceOptionContainer from "./pages/PlaceOption";
 import NextTrip from "./pages/NextTrip";
 import SeatBooking from "./pages/SeatBooking";
 
@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <PlaceOption />
+          <PlaceOptionContainer />
         </Route>
         <Route exact path="/nextTrip/:place">
           <NextTrip />
