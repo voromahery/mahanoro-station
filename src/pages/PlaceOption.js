@@ -7,7 +7,7 @@ export default function PlaceOption() {
 
   return (
     <>
-      <h1>MAIN PAGE</h1>
+      <h1>Where are you going?</h1>
       <ul>
         {places.map((place, index) => (
           <Link key={place[index]} to={`/nextTrip/${place}`}>
