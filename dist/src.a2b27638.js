@@ -36451,28 +36451,20 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
+var _reactRedux = require("react-redux");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function PlaceOption() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "MAIN PAGE"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "nextTrip"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    value: "Antananarivo"
-  }, "Antananarivo"))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "nextTrip"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    value: "Toamasina"
-  }, "Toamasina"))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "nextTrip"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    value: "Vatomandry"
-  }, "Vatomandry"))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "nextTrip"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    value: "Moramanga"
-  }, "Moramanga")))));
+  const places = ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"];
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "MAIN PAGE"), /*#__PURE__*/_react.default.createElement("ul", null, places.map((place, index) => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    key: place[index],
+    to: `/nextTrip/${place}`
+  }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", {
+    value: place
+  }, place))))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/pages/NextTrip.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js"}],"src/pages/NextTrip.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36482,16 +36474,25 @@ exports.default = NextTrip;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reactRedux = require("react-redux");
+
 var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function NextTrip() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Next Trip"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/booking"
-  }, /*#__PURE__*/_react.default.createElement("button", null, "Book a seat")));
+  const allData = (0, _reactRedux.useSelector)(state => state.data);
+  const {
+    place
+  } = (0, _reactRouterDom.useParams)();
+  const dataFilter = allData.filter(data => data.destination === place);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Next Trip"), dataFilter.map(data => /*#__PURE__*/_react.default.createElement("div", {
+    key: data.id
+  }, /*#__PURE__*/_react.default.createElement("h2", null, data.departureTime), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: `/booking/${data.id}`
+  }, /*#__PURE__*/_react.default.createElement("button", null, "Book a seat")))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/pages/SeatBooking.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/pages/SeatBooking.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36501,12 +36502,21 @@ exports.default = SeatBooking;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
+var _reactRedux = require("react-redux");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function SeatBooking() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat to:"));
+  const allData = (0, _reactRedux.useSelector)(state => state.data);
+  const {
+    bookingId
+  } = (0, _reactRouterDom.useParams)();
+  const booking = allData.find(data => data.id === Number(bookingId));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat to:", booking.id));
 }
-},{"react":"node_modules/react/index.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36534,10 +36544,10 @@ function App() {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_PlaceOption.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
-    path: "/nextTrip"
+    path: "/nextTrip/:place"
   }, /*#__PURE__*/_react.default.createElement(_NextTrip.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
-    path: "/booking"
+    path: "/booking/:bookingId"
   }, /*#__PURE__*/_react.default.createElement(_SeatBooking.default, null))));
 }
 

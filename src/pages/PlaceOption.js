@@ -1,31 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function PlaceOption() {
+  const places = ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"];
+
   return (
     <>
       <h1>MAIN PAGE</h1>
       <ul>
-        <li>
-          <Link to="nextTrip">
-            <button value="Antananarivo">Antananarivo</button>
+        {places.map((place, index) => (
+          <Link key={place[index]} to={`/nextTrip/${place}`}>
+            <li>
+              <button value={place}>{place}</button>
+            </li>
           </Link>
-        </li>
-        <li>
-          <Link to="nextTrip">
-            <button value="Toamasina">Toamasina</button>
-          </Link>
-        </li>
-        <li>
-          <Link to="nextTrip">
-            <button value="Vatomandry">Vatomandry</button>
-          </Link>
-        </li>
-        <li>
-          <Link to="nextTrip">
-            <button value="Moramanga">Moramanga</button>
-          </Link>
-        </li>
+        ))}
       </ul>
     </>
   );
