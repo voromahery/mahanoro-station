@@ -33287,6 +33287,23 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 var _default = thunk;
 exports.default = _default;
+},{}],"src/user.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  // places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
+  user: {
+    firstName: "Fabrice",
+    lastName: "Daniel",
+    phone: "0342364876"
+  } // booking: [],
+
+};
+exports.default = _default;
 },{}],"src/reducer/dataReducer.js":[function(require,module,exports) {
 "use strict";
 
@@ -33307,6 +33324,26 @@ function data(state = [], action) {
 
 var _default = data;
 exports.default = _default;
+},{}],"src/reducer/userReducer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function user(state = null, action) {
+  switch (action.type) {
+    case "USER":
+      return state;
+
+    default:
+      return state;
+  }
+}
+
+var _default = user;
+exports.default = _default;
 },{}],"src/reducer/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -33319,14 +33356,17 @@ var _redux = require("redux");
 
 var _dataReducer = _interopRequireDefault(require("./dataReducer"));
 
+var _userReducer = _interopRequireDefault(require("./userReducer"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const rootReducer = (0, _redux.combineReducers)({
-  data: _dataReducer.default
+  data: _dataReducer.default,
+  user: _userReducer.default
 });
 var _default = rootReducer;
 exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js","./dataReducer":"src/reducer/dataReducer.js"}],"src/store.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js","./dataReducer":"src/reducer/dataReducer.js","./userReducer":"src/reducer/userReducer.js"}],"src/store.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33338,14 +33378,16 @@ var _redux = require("redux");
 
 var _reduxThunk = _interopRequireDefault(require("redux-thunk"));
 
+var _user = _interopRequireDefault(require("./user"));
+
 var _index = _interopRequireDefault(require("./reducer/index"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const store = (0, _redux.createStore)(_index.default, (0, _redux.applyMiddleware)(_reduxThunk.default));
+const store = (0, _redux.createStore)(_index.default, _user.default, (0, _redux.applyMiddleware)(_reduxThunk.default));
 var _default = store;
 exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js","redux-thunk":"node_modules/redux-thunk/es/index.js","./reducer/index":"src/reducer/index.js"}],"src/actions/data.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js","redux-thunk":"node_modules/redux-thunk/es/index.js","./user":"src/user.js","./reducer/index":"src/reducer/index.js"}],"src/actions/data.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33419,7 +33461,25 @@ const mapDispatchToProps = {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Header.default);
 
 exports.default = _default;
-},{"react-redux":"node_modules/react-redux/es/index.js","../actions/data":"src/actions/data.js","./Header":"src/containers/Header.js"}],"src/App.js":[function(require,module,exports) {
+},{"react-redux":"node_modules/react-redux/es/index.js","../actions/data":"src/actions/data.js","./Header":"src/containers/Header.js"}],"src/containers/PlaceOption.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = PlaceOption;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import { useSelector } from "react-redux";
+function PlaceOption() {
+  //   const allData = useSelector((state) => state);
+  //   console.log(allData);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "MAIN PAGE"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", null, "Antananarivo")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", null, "Toamasina")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", null, "Vatomandry")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", null, "Moramanga"))));
+}
+},{"react":"node_modules/react/index.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33431,15 +33491,17 @@ var _react = _interopRequireDefault(require("react"));
 
 var _HeaderContainer = _interopRequireDefault(require("./containers/HeaderContainer"));
 
+var _PlaceOption = _interopRequireDefault(require("./containers/PlaceOption"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return /*#__PURE__*/_react.default.createElement(_HeaderContainer.default, null);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_HeaderContainer.default, null), /*#__PURE__*/_react.default.createElement(_PlaceOption.default, null));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./containers/HeaderContainer":"src/containers/HeaderContainer.js"}],"src/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./containers/HeaderContainer":"src/containers/HeaderContainer.js","./containers/PlaceOption":"src/containers/PlaceOption.js"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -33485,7 +33547,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52042" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49761" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
