@@ -1,5 +1,6 @@
 export default {
   // places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
+  openModal: false,
   user: {
     firstName: "Fabrice",
     lastName: "Daniel",
