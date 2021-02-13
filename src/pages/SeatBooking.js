@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import { displayModal } from "../actions/modal";
+import Modal from "../containers/Modal";
 
 export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
@@ -39,9 +40,12 @@ export default function SeatBooking() {
   const minute = fullDate.getMinutes();
   const date = `${format(fullDate, "dd/MM/yyyy")}`;
 
+  const openModal = useSelector((state) => state.displayModal);
+  console.log(openModal);
   const dispatch = useDispatch();
   return (
     <>
+      {openModal && <Modal />}
       <h1>
         Book a seat to:<span>{booking.destination}</span>
       </h1>

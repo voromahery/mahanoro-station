@@ -38268,7 +38268,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   // places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
-  openModal: false,
+  displayModal: false,
   user: {
     firstName: "Fabrice",
     lastName: "Daniel",
@@ -56898,7 +56898,29 @@ function displayModal() {
     type: "TOGGLE_MODAL"
   };
 }
-},{}],"src/pages/SeatBooking.js":[function(require,module,exports) {
+},{}],"src/containers/Modal.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Modal;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _modal = require("../actions/modal");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Modal() {
+  const dispatch = (0, _reactRedux.useDispatch)();
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: () => dispatch((0, _modal.displayModal)(false))
+  }, "CLEAR"), /*#__PURE__*/_react.default.createElement("h1", null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement("p", null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement("button", null, "Check your account"));
+}
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js"}],"src/pages/SeatBooking.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56916,6 +56938,8 @@ var _reactRedux = require("react-redux");
 
 var _modal = require("../actions/modal");
 
+var _Modal = _interopRequireDefault(require("../containers/Modal"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function SeatBooking() {
@@ -56932,14 +56956,16 @@ function SeatBooking() {
   const hour = fullDate.getHours();
   const minute = fullDate.getMinutes();
   const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`;
+  const openModal = (0, _reactRedux.useSelector)(state => state.displayModal);
+  console.log(openModal);
   const dispatch = (0, _reactRedux.useDispatch)();
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat to:", /*#__PURE__*/_react.default.createElement("span", null, booking.destination)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "Pick a seat"), /*#__PURE__*/_react.default.createElement("ul", null, seats.map((seat, index) => /*#__PURE__*/_react.default.createElement("li", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openModal && /*#__PURE__*/_react.default.createElement(_Modal.default, null), /*#__PURE__*/_react.default.createElement("h1", null, "Book a seat to:", /*#__PURE__*/_react.default.createElement("span", null, booking.destination)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "Pick a seat"), /*#__PURE__*/_react.default.createElement("ul", null, seats.map((seat, index) => /*#__PURE__*/_react.default.createElement("li", {
     key: index
   }, seat))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "Trip informations:"), /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, "Departure time: ", /*#__PURE__*/_react.default.createElement("span", null, `${hour}:${minute}, ${date}`)), /*#__PURE__*/_react.default.createElement("li", null, "Driver: ", /*#__PURE__*/_react.default.createElement("span", null, booking.driverName)), /*#__PURE__*/_react.default.createElement("li", null, "Driver's contact: ", /*#__PURE__*/_react.default.createElement("span", null, booking.driverContact)), /*#__PURE__*/_react.default.createElement("li", null, "Estimated duration: ", /*#__PURE__*/_react.default.createElement("span", null, booking.estimatedDuration)), /*#__PURE__*/_react.default.createElement("li", null, "Breaks: ", /*#__PURE__*/_react.default.createElement("span", null, booking.breaks))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, "20000", /*#__PURE__*/_react.default.createElement("span", null, "Ar"), "/seat")), /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => dispatch((0, _modal.displayModal)(true))
   }, "Book ", /*#__PURE__*/_react.default.createElement("span", null, "2"), " seats"), /*#__PURE__*/_react.default.createElement("p", null, "Total: 40000 Ar")))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
