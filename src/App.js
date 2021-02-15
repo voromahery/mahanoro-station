@@ -4,7 +4,7 @@ import Header from "./containers/HeaderContainer";
 import PlaceOptionContainer from "./pages/PlaceOption";
 import NextTrip from "./pages/NextTrip";
 import SeatBooking from "./pages/SeatBooking";
-import Account from "./pages/Account";
+import AccountContainer from "./pages/Account";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <SeatBooking />
         </Route>
         <Route exact path="/account">
-          <Account />
+          <AccountContainer />
         </Route>
       </Switch>
     </>

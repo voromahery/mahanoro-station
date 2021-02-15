@@ -38597,7 +38597,153 @@ Modal.Button = function ModalButton({
 }) {
   return /*#__PURE__*/_react.default.createElement(_modal.Button, restProps, children);
 };
-},{"react":"node_modules/react/index.js","./styles/modal":"src/components/modal/styles/modal.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/modal":"src/components/modal/styles/modal.js"}],"src/components/account/styles/account.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Text = exports.Form = exports.Span = exports.Wrapper = exports.Title = exports.Label = exports.Cancel = exports.Update = exports.Input = exports.Heading = exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.div``;
+exports.Container = Container;
+const Heading = _styledComponents.default.h1``;
+exports.Heading = Heading;
+const Input = _styledComponents.default.input`
+  height: 44px;
+  max-width: 444px;
+`;
+exports.Input = Input;
+const Update = _styledComponents.default.button`
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-right: 32px;
+  padding-left: 32px;
+  max-width: fit-content;
+`;
+exports.Update = Update;
+const Cancel = _styledComponents.default.button``;
+exports.Cancel = Cancel;
+const Label = _styledComponents.default.label`
+  display: flex;
+  flex-direction: column;
+`;
+exports.Label = Label;
+const Title = _styledComponents.default.h3``;
+exports.Title = Title;
+const Wrapper = _styledComponents.default.div`
+`;
+exports.Wrapper = Wrapper;
+const Span = _styledComponents.default.span``;
+exports.Span = Span;
+const Form = _styledComponents.default.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+exports.Form = Form;
+const Text = _styledComponents.default.p``;
+exports.Text = Text;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/account/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Account;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _account = require("./styles/account");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Account({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Container, restProps, children);
+}
+
+Account.Heading = function AccountHeading({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Heading, restProps, children);
+};
+
+Account.Form = function AccountForm({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Form, restProps, children);
+};
+
+Account.Span = function AccountSpan({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Span, restProps, children);
+};
+
+Account.Text = function AccountText({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Text, restProps, children);
+};
+
+Account.Image = function AccountImage({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(Image, restProps);
+};
+
+Account.Input = function AccountInput({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Input, restProps);
+};
+
+Account.Update = function AccountUpdate({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Update, restProps, children);
+};
+
+Account.Cancel = function AccountCancel({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Cancel, restProps, children);
+};
+
+Account.Label = function AccountLabel({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Label, restProps, children);
+};
+
+Account.Title = function AccountTitle({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Title, restProps, children);
+};
+
+Account.Wrapper = function AccountWrapper({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_account.Wrapper, restProps, children);
+};
+},{"react":"node_modules/react/index.js","./styles/account":"src/components/account/styles/account.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38615,13 +38761,21 @@ Object.defineProperty(exports, "Modal", {
     return _modal.default;
   }
 });
+Object.defineProperty(exports, "Account", {
+  enumerable: true,
+  get: function () {
+    return _account.default;
+  }
+});
 
 var _placeOption = _interopRequireDefault(require("./placeOption"));
 
 var _modal = _interopRequireDefault(require("./modal"));
 
+var _account = _interopRequireDefault(require("./account"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./placeOption":"src/components/placeOption/index.js","./modal":"src/components/modal/index.js"}],"src/pages/PlaceOption.js":[function(require,module,exports) {
+},{"./placeOption":"src/components/placeOption/index.js","./modal":"src/components/modal/index.js","./account":"src/components/account/index.js"}],"src/pages/PlaceOption.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57055,16 +57209,30 @@ function SeatBooking() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Account;
+exports.default = AccountContainer;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _components = require("../components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Account() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "ACCOUNT"));
+function AccountContainer() {
+  return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Heading, null, "My account ", /*#__PURE__*/_react.default.createElement(_components.Account.Span, null)), /*#__PURE__*/_react.default.createElement(_components.Account.Form, null, /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "20px"
+    }
+  }, /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "First name", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
+    type: "text"
+  })), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Last name", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
+    type: "text"
+  })), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Phone number", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
+    type: "phone"
+  }))), /*#__PURE__*/_react.default.createElement(_components.Account.Update, null, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Destination"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Date, time")), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Number of seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Price")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, null, "Cancel")));
 }
-},{"react":"node_modules/react/index.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
