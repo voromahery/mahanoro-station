@@ -38655,6 +38655,7 @@ exports.Heading = Heading;
 const List = _styledComponents.default.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
 `;
 exports.List = List;
 const ListItem = _styledComponents.default.li``;
@@ -38668,6 +38669,8 @@ const Button = _styledComponents.default.button`
   padding-left: 20px;
   padding-right: 20px;
   border: none;
+  width: 100%;
+  /* max-width: 413px; */
 `;
 exports.Button = Button;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/placeOption/index.js":[function(require,module,exports) {

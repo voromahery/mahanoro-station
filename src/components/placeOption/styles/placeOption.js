@@ -5,6 +5,7 @@ export const Heading = styled.h1``;
 export const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
 `;
 export const ListItem = styled.li``;
 export const Button = styled.button`
@@ -16,4 +17,6 @@ export const Button = styled.button`
   padding-left: 20px;
   padding-right: 20px;
   border: none;
+  width: 100%;
+  /* max-width: 413px; */
 `;
