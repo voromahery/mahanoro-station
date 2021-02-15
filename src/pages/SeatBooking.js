@@ -11,7 +11,8 @@ export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
   const { bookingId } = useParams();
   const booking = allData.find((data) => data.id === Number(bookingId));
-  const filterSeat = booking.seats.filter((seat) => seat.isAvailable === true);
+  const bookingPlace = useSelector((state) => state.booking);
+  const price = bookingPlace.length * booking.price;
   const seats = ["🪑"];
   // seats.length = filterSeat.length;
 
@@ -23,6 +24,23 @@ export default function SeatBooking() {
 
   const openModal = useSelector((state) => state.displayModal);
   const dispatch = useDispatch();
+  // function bookingPlace() {
+  //   if (cartItem.some((cart) => cart.id === song.id)) {
+  //     return (
+  //       <p onClick={() => dispatch(addBooking(booking.id))}>BOOK</p>
+  //     )
+  //   } else {
+  //     return (
+  //       <img
+  //         src={cartIcon}
+  //         className="add-cart"
+  //         alt=""
+  //         id={song.id}
+  //         onClick={() => dispatch(addToCart(song))}
+  //       />
+  //     );
+  //   }
+  // }
 
   return (
     <Booking>
@@ -70,13 +88,14 @@ export default function SeatBooking() {
             </Booking.Info>
             <Booking.Wrapper>
               <Booking.Price>
-                20000<Booking.Span>Ar</Booking.Span>/seat
+                {booking.price}<Booking.Span>Ar</Booking.Span>/seat
               </Booking.Price>
             </Booking.Wrapper>
             <Booking.Button onClick={() => dispatch(displayModal(true))}>
-              Book <Booking.ButtonSpan>2</Booking.ButtonSpan> seats
+              Book <Booking.ButtonSpan>{bookingPlace.length}</Booking.ButtonSpan>{" "}
+              seats
             </Booking.Button>
-            <Booking.Total>Total: 40000 Ar</Booking.Total>
+            <Booking.Total>Total: {price} Ar</Booking.Total>
           </Booking.Wrapper>
         </Booking.Wrapper>
       </Booking.Wrapper>

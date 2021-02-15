@@ -18,7 +18,9 @@ export default function ModalContainer() {
           your account. You can review it there.
         </Modal.Paragraph>
         <Link to="/account">
-          <Modal.Button>Check your account</Modal.Button>
+          <Modal.Button onClick={() => dispatch(displayModal(false))}>
+            Check your account
+          </Modal.Button>
         </Link>
       </Modal.Wrapper>
     </Modal>

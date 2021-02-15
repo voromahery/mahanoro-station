@@ -57427,7 +57427,9 @@ function ModalContainer() {
     onClick: () => dispatch((0, _modal.displayModal)(false))
   }, "CLEAR"), /*#__PURE__*/_react.default.createElement(_components.Modal.Heading, null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement(_components.Modal.Paragraph, null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/account"
-  }, /*#__PURE__*/_react.default.createElement(_components.Modal.Button, null, "Check your account"))));
+  }, /*#__PURE__*/_react.default.createElement(_components.Modal.Button, {
+    onClick: () => dispatch((0, _modal.displayModal)(false))
+  }, "Check your account"))));
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js","../components":"src/components/index.js"}],"src/actions/booking.js":[function(require,module,exports) {
 "use strict";
@@ -57475,7 +57477,8 @@ function SeatBooking() {
     bookingId
   } = (0, _reactRouterDom.useParams)();
   const booking = allData.find(data => data.id === Number(bookingId));
-  const filterSeat = booking.seats.filter(seat => seat.isAvailable === true);
+  const bookingPlace = (0, _reactRedux.useSelector)(state => state.booking);
+  const price = bookingPlace.length * booking.price;
   const seats = ["🪑"]; // seats.length = filterSeat.length;
   // Get the date
 
@@ -57484,16 +57487,33 @@ function SeatBooking() {
   const minute = fullDate.getMinutes();
   const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`;
   const openModal = (0, _reactRedux.useSelector)(state => state.displayModal);
-  const dispatch = (0, _reactRedux.useDispatch)();
+  const dispatch = (0, _reactRedux.useDispatch)(); // function bookingPlace() {
+  //   if (cartItem.some((cart) => cart.id === song.id)) {
+  //     return (
+  //       <p onClick={() => dispatch(addBooking(booking.id))}>BOOK</p>
+  //     )
+  //   } else {
+  //     return (
+  //       <img
+  //         src={cartIcon}
+  //         className="add-cart"
+  //         alt=""
+  //         id={song.id}
+  //         onClick={() => dispatch(addToCart(song))}
+  //       />
+  //     );
+  //   }
+  // }
+
   return /*#__PURE__*/_react.default.createElement(_components.Booking, null, openModal && /*#__PURE__*/_react.default.createElement(_Modal.default, null), /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Book a seat to:", /*#__PURE__*/_react.default.createElement("span", null, booking.destination)), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Pick a seat"), /*#__PURE__*/_react.default.createElement(_components.Booking.Seats, null, booking.seats.map((seat, index) => /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, {
     onClick: () => dispatch((0, _booking.addBooking)(seat.id)),
     key: index,
     style: {
       opacity: seat.isAvailable ? "1" : "0"
     }
-  }, seats))), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Trip informations:"), /*#__PURE__*/_react.default.createElement(_components.Booking.Info, null, /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Departure time:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, `${hour}:${minute}, ${date}`)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.driverName)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver's contact:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.driverContact)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Estimated duration:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.estimatedDuration)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Breaks: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.breaks))), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Price, null, "20000", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, "Ar"), "/seat")), /*#__PURE__*/_react.default.createElement(_components.Booking.Button, {
+  }, seats))), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Trip informations:"), /*#__PURE__*/_react.default.createElement(_components.Booking.Info, null, /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Departure time:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, `${hour}:${minute}, ${date}`)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.driverName)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver's contact:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.driverContact)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Estimated duration:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.estimatedDuration)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Breaks: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.breaks))), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Price, null, booking.price, /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, "Ar"), "/seat")), /*#__PURE__*/_react.default.createElement(_components.Booking.Button, {
     onClick: () => dispatch((0, _modal.displayModal)(true))
-  }, "Book ", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, "2"), " seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: 40000 Ar")))));
+  }, "Book ", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, bookingPlace.length), " ", "seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: ", price, " Ar")))));
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js","../actions/booking":"src/actions/booking.js"}],"src/pages/Account.js":[function(require,module,exports) {
 "use strict";
@@ -57540,7 +57560,9 @@ function AccountContainer() {
     onChange: e => e.target.value
   }))), /*#__PURE__*/_react.default.createElement(_components.Account.Update, {
     onSubmit: updateUser
-  }, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Destination"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Date, time")), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Number of seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Price")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, null, "Cancel")));
+  }, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, booking.map((book, index) => /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    key: index
+  }, book))), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Price")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, null, "Cancel")));
 }
 },{"react":"node_modules/react/index.js","../components":"src/components/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
