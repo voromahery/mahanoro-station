@@ -6,5 +6,5 @@ export default {
     lastName: "Daniel",
     phone: "0342364876",
   },
-  // booking: [],
+  booking: [],
 };

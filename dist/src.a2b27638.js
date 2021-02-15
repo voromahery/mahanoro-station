@@ -38281,8 +38281,8 @@ var _default = {
     firstName: "Fabrice",
     lastName: "Daniel",
     phone: "0342364876"
-  } // booking: [],
-
+  },
+  booking: []
 };
 exports.default = _default;
 },{}],"src/reducer/dataReducer.js":[function(require,module,exports) {
@@ -38345,6 +38345,26 @@ function displayModal(state = false, action) {
 
 var _default = displayModal;
 exports.default = _default;
+},{}],"src/reducer/booking.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function booking(state = [], action) {
+  switch (action.type) {
+    case "ADD_BOOKING":
+      return [...state, action.payload];
+
+    default:
+      return state;
+  }
+}
+
+var _default = booking;
+exports.default = _default;
 },{}],"src/reducer/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -38361,16 +38381,19 @@ var _userReducer = _interopRequireDefault(require("./userReducer"));
 
 var _modalReducer = _interopRequireDefault(require("./modalReducer"));
 
+var _booking = _interopRequireDefault(require("./booking"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const rootReducer = (0, _redux.combineReducers)({
   data: _dataReducer.default,
   user: _userReducer.default,
-  displayModal: _modalReducer.default
+  displayModal: _modalReducer.default,
+  booking: _booking.default
 });
 var _default = rootReducer;
 exports.default = _default;
-},{"redux":"node_modules/redux/es/redux.js","./dataReducer":"src/reducer/dataReducer.js","./userReducer":"src/reducer/userReducer.js","./modalReducer":"src/reducer/modalReducer.js"}],"src/store.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js","./dataReducer":"src/reducer/dataReducer.js","./userReducer":"src/reducer/userReducer.js","./modalReducer":"src/reducer/modalReducer.js","./booking":"src/reducer/booking.js"}],"src/store.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
