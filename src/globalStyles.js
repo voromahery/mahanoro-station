@@ -18,10 +18,6 @@ a:hover {
     text-decoration: underline;
 }
 
-.booked {
-    opacity: 0;
-}
-
 button {
     cursor: pointer;
 }

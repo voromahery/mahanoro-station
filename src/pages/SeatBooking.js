@@ -26,53 +26,58 @@ export default function SeatBooking() {
   return (
     <Booking>
       {openModal && <ModalContainer />}
-      <h1>
+      <Booking.Title>
         Book a seat to:<span>{booking.destination}</span>
-      </h1>
-      <div>
-        <div>
-          <h3>Pick a seat</h3>
-          <Booking.List>
+      </Booking.Title>
+      <Booking.Wrapper>
+        <Booking.Wrapper>
+          <Booking.Title>Pick a seat</Booking.Title>
+          <Booking.Seats>
             {booking.seats.map((seat, index) => (
               <Booking.ListItem
                 key={index}
-                className={!seat.isAvailable && "booked"}
+                style={{
+                  opacity: seat.isAvailable ? "1" : "0",
+                }}
               >
                 {seats}
               </Booking.ListItem>
             ))}
-          </Booking.List>
-          <div>
-            <h3>Trip informations:</h3>
-            <ul>
-              <li>
-                Departure time: <span>{`${hour}:${minute}, ${date}`}</span>
-              </li>
-              <li>
-                Driver: <span>{booking.driverName}</span>
-              </li>
-              <li>
-                Driver's contact: <span>{booking.driverContact}</span>
-              </li>
-              <li>
-                Estimated duration: <span>{booking.estimatedDuration}</span>
-              </li>
-              <li>
-                Breaks: <span>{booking.breaks}</span>
-              </li>
-            </ul>
-            <div>
-              <div>
-                20000<span>Ar</span>/seat
-              </div>
-            </div>
-            <button onClick={() => dispatch(displayModal(true))}>
-              Book <span>2</span> seats
-            </button>
-            <p>Total: 40000 Ar</p>
-          </div>
-        </div>
-      </div>
+          </Booking.Seats>
+          <Booking.Wrapper>
+            <Booking.Title>Trip informations:</Booking.Title>
+            <Booking.Info>
+              <Booking.ListItem>
+                Departure time:
+                <Booking.Span>{`${hour}:${minute}, ${date}`}</Booking.Span>
+              </Booking.ListItem>
+              <Booking.ListItem>
+                Driver: <Booking.Span>{booking.driverName}</Booking.Span>
+              </Booking.ListItem>
+              <Booking.ListItem>
+                Driver's contact:
+                <Booking.Span>{booking.driverContact}</Booking.Span>
+              </Booking.ListItem>
+              <Booking.ListItem>
+                Estimated duration:
+                <Booking.Span>{booking.estimatedDuration}</Booking.Span>
+              </Booking.ListItem>
+              <Booking.ListItem>
+                Breaks: <Booking.Span>{booking.breaks}</Booking.Span>
+              </Booking.ListItem>
+            </Booking.Info>
+            <Booking.Wrapper>
+              <Booking.Price>
+                20000<Booking.Span>Ar</Booking.Span>/seat
+              </Booking.Price>
+            </Booking.Wrapper>
+            <Booking.Button onClick={() => dispatch(displayModal(true))}>
+              Book <Booking.ButtonSpan>2</Booking.ButtonSpan> seats
+            </Booking.Button>
+            <Booking.Total>Total: 40000 Ar</Booking.Total>
+          </Booking.Wrapper>
+        </Booking.Wrapper>
+      </Booking.Wrapper>
     </Booking>
   );
 }
