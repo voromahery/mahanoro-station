@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Booking } from "../components";
 import { displayModal } from "../actions/modal";
 import ModalContainer from "../containers/Modal";
+import { addBooking } from "../actions/booking";
 
 export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
@@ -21,8 +22,8 @@ export default function SeatBooking() {
   const date = `${format(fullDate, "dd/MM/yyyy")}`;
 
   const openModal = useSelector((state) => state.displayModal);
-  console.log(openModal);
   const dispatch = useDispatch();
+
   return (
     <Booking>
       {openModal && <ModalContainer />}
@@ -35,6 +36,7 @@ export default function SeatBooking() {
           <Booking.Seats>
             {booking.seats.map((seat, index) => (
               <Booking.ListItem
+                onClick={() => dispatch(addBooking(seat.id))}
                 key={index}
                 style={{
                   opacity: seat.isAvailable ? "1" : "0",
