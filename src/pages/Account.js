@@ -1,7 +1,12 @@
 import React from "react";
 import { Account } from "../components";
+import { useSelector } from "react-redux";
 
 export default function AccountContainer() {
+  const firstName = useSelector((state) => state.user.firstName);
+  const lastName = useSelector((state) => state.user.lastName);
+  const phone = useSelector((state) => state.user.phone);
+  console.log(firstName);
   return (
     <Account>
       <Account.Heading>
@@ -13,15 +18,27 @@ export default function AccountContainer() {
         >
           <Account.Label>
             First name
-            <Account.Input type="text" />
+            <Account.Input
+              type="text"
+              value={firstName}
+              onChange={(e) => e.target.value}
+            />
           </Account.Label>
           <Account.Label>
             Last name
-            <Account.Input type="text" />
+            <Account.Input
+              type="text"
+              value={lastName}
+              onChange={(e) => e.target.value}
+            />
           </Account.Label>
           <Account.Label>
             Phone number
-            <Account.Input type="phone" />
+            <Account.Input
+              type="phone"
+              value={phone}
+              onChange={(e) => e.target.value}
+            />
           </Account.Label>
         </Account.Wrapper>
         <Account.Update>Update</Account.Update>

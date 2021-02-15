@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Heading, Paragraph, Close, Button } from "./styles/modal";
+import {
+  Container,
+  Heading,
+  Paragraph,
+  Close,
+  Button,
+  Wrapper,
+} from "./styles/modal";
 
 export default function Modal({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -19,4 +26,8 @@ Modal.Close = function ModalClose({ children, ...restProps }) {
 
 Modal.Button = function ModalButton({ children, ...restProps }) {
   return <Button {...restProps}>{children}</Button>;
+};
+
+Modal.Wrapper = function ModalWrapper({ children, ...restProps }) {
+  return <Wrapper {...restProps}>{children}</Wrapper>;
 };

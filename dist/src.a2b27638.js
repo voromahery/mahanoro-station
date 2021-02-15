@@ -38533,14 +38533,26 @@ PlaceOption.Button = function PlaceOptionButton({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Button = exports.Close = exports.Paragraph = exports.Heading = exports.Container = void 0;
+exports.Button = exports.Close = exports.Paragraph = exports.Heading = exports.Wrapper = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Container = _styledComponents.default.div``;
+const Container = _styledComponents.default.div`
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100vw;
+  height: 100vh;
+`;
 exports.Container = Container;
+const Wrapper = _styledComponents.default.div`
+  border: 5px solid #e53170;
+  background-color: #ffffff;
+  top: 30%;
+  z-index: 2;
+`;
+exports.Wrapper = Wrapper;
 const Heading = _styledComponents.default.h1``;
 exports.Heading = Heading;
 const Paragraph = _styledComponents.default.p``;
@@ -38596,6 +38608,13 @@ Modal.Button = function ModalButton({
   ...restProps
 }) {
   return /*#__PURE__*/_react.default.createElement(_modal.Button, restProps, children);
+};
+
+Modal.Wrapper = function ModalWrapper({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_modal.Wrapper, restProps, children);
 };
 },{"react":"node_modules/react/index.js","./styles/modal":"src/components/modal/styles/modal.js"}],"src/components/account/styles/account.js":[function(require,module,exports) {
 "use strict";
@@ -57152,11 +57171,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function ModalContainer() {
   const dispatch = (0, _reactRedux.useDispatch)();
-  return /*#__PURE__*/_react.default.createElement(_components.Modal, null, /*#__PURE__*/_react.default.createElement(_components.Modal.Close, {
+  return /*#__PURE__*/_react.default.createElement(_components.Modal, null, /*#__PURE__*/_react.default.createElement(_components.Modal.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Modal.Close, {
     onClick: () => dispatch((0, _modal.displayModal)(false))
   }, "CLEAR"), /*#__PURE__*/_react.default.createElement(_components.Modal.Heading, null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement(_components.Modal.Paragraph, null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/account"
-  }, /*#__PURE__*/_react.default.createElement(_components.Modal.Button, null, "Check your account")));
+  }, /*#__PURE__*/_react.default.createElement(_components.Modal.Button, null, "Check your account"))));
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js","../components":"src/components/index.js"}],"src/pages/SeatBooking.js":[function(require,module,exports) {
 "use strict";
@@ -57215,9 +57234,15 @@ var _react = _interopRequireDefault(require("react"));
 
 var _components = require("../components");
 
+var _reactRedux = require("react-redux");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function AccountContainer() {
+  const firstName = (0, _reactRedux.useSelector)(state => state.user.firstName);
+  const lastName = (0, _reactRedux.useSelector)(state => state.user.lastName);
+  const phone = (0, _reactRedux.useSelector)(state => state.user.phone);
+  console.log(firstName);
   return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Heading, null, "My account ", /*#__PURE__*/_react.default.createElement(_components.Account.Span, null)), /*#__PURE__*/_react.default.createElement(_components.Account.Form, null, /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, {
     style: {
       display: "flex",
@@ -57225,14 +57250,20 @@ function AccountContainer() {
       gap: "20px"
     }
   }, /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "First name", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
-    type: "text"
+    type: "text",
+    value: firstName,
+    onChange: e => e.target.value
   })), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Last name", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
-    type: "text"
+    type: "text",
+    value: lastName,
+    onChange: e => e.target.value
   })), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Phone number", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
-    type: "phone"
+    type: "phone",
+    value: phone,
+    onChange: e => e.target.value
   }))), /*#__PURE__*/_react.default.createElement(_components.Account.Update, null, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Destination"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Date, time")), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Number of seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, "Price")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, null, "Cancel")));
 }
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

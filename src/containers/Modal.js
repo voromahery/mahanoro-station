@@ -8,17 +8,19 @@ export default function ModalContainer() {
   const dispatch = useDispatch();
   return (
     <Modal>
-      <Modal.Close onClick={() => dispatch(displayModal(false))}>
-        CLEAR
-      </Modal.Close>
-      <Modal.Heading>Booking comfirmed!</Modal.Heading>
-      <Modal.Paragraph>
-        Thank you for trusting our services. Your booking has been added to your
-        account. You can review it there.
-      </Modal.Paragraph>
-      <Link to="/account">
-        <Modal.Button>Check your account</Modal.Button>
-      </Link>
+      <Modal.Wrapper>
+        <Modal.Close onClick={() => dispatch(displayModal(false))}>
+          CLEAR
+        </Modal.Close>
+        <Modal.Heading>Booking comfirmed!</Modal.Heading>
+        <Modal.Paragraph>
+          Thank you for trusting our services. Your booking has been added to
+          your account. You can review it there.
+        </Modal.Paragraph>
+        <Link to="/account">
+          <Modal.Button>Check your account</Modal.Button>
+        </Link>
+      </Modal.Wrapper>
     </Modal>
   );
 }
