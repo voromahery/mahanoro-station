@@ -1,24 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useParams } from 'react-router-dom';
+import { format } from "date-fns";
 import { Account } from "../components";
+import { useSelector } from "react-redux";
 
 export default function AccountContainer() {
-  // const { bookingId } = useParams();
-  // const allData = useSelector((state) => state.data);
-  // const bookingFind = allData.find((data) => data.id === Number(bookingId));
-  // console.log(bookingFind);
-
+  const booking = useSelector((state) => state.booking);
   const firstName = useSelector((state) => state.user.firstName);
   const lastName = useSelector((state) => state.user.lastName);
   const phone = useSelector((state) => state.user.phone);
+  const price = booking.length;
   function updateUser(e) {
     e.preventDefault();
   }
   return (
     <Account>
       <Account.Heading>
-        My account <Account.Span></Account.Span>
+        My account <Account.Span>{firstName}</Account.Span>
       </Account.Heading>
       <Account.Form>
         <Account.Wrapper
@@ -54,20 +51,25 @@ export default function AccountContainer() {
       <Account>
         <Account.Title>My bookings:</Account.Title>
         <Account.Wrapper>
-          {/* {booking.map((book, index) => (
-            <div>
-              <div key={index}>{book}</div>
-            </div>
-          ))} */}
-  
-          {/* <Account.Text>Destination</Account.Text>
-          <Account.Text>Date, time</Account.Text>
+          {booking.map((book, index) => {
+            const fullDate = new Date(book.departureTime);
+            const hour = fullDate.getHours();
+            const minute = fullDate.getMinutes();
+            const date = `${format(fullDate, "dd/MM/yyyy")}`;
+
+            return (
+              <div>
+                <Account.Text>{book.destination}</Account.Text>
+                <Account.Text>{`${date}, ${hour}:${minute}`}</Account.Text>
+                <Account.Wrapper>
+                  <Account.Text>{book.length} seats</Account.Text>
+                  <Account.Text>{price} Ar</Account.Text>
+                </Account.Wrapper>
+                <Account.Cancel>Cancel</Account.Cancel>
+              </div>
+            );
+          })}
         </Account.Wrapper>
-        <Account.Wrapper>
-          <Account.Text>Number of seats</Account.Text> */}
-          <Account.Text>Price</Account.Text>
-        </Account.Wrapper>
-        <Account.Cancel>Cancel</Account.Cancel>
       </Account>
     </Account>
   );

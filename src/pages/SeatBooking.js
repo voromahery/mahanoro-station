@@ -14,17 +14,8 @@ export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
   const { bookingId } = useParams();
   const bookingFind = allData.find((data) => data.id === Number(bookingId));
-  const bookingPlace = useSelector((state) => state.booking);
+  let bookingPlace = useSelector((state) => state.booking);
   const price = bookingPlace.length * bookingFind.price;
-
-  // let bookingObj = {
-  //   time: bookingFind.departureTime,
-  //   id: bookingFind.departureTime,
-  //   place: bookingFind.destination,
-  // };
-
-  // bookingPlace.push(bookingObj);
-  console.log(bookingPlace);
 
   // Get the date
   const fullDate = new Date(bookingFind.departureTime);
@@ -47,7 +38,7 @@ export default function SeatBooking() {
             {bookingFind.seats.map((seat, index) => {
               // Changing the appearance of the chairs
               function booked() {
-                if (bookingPlace.some((book) => book.id === seat.id && bookingFind.id)) {
+                if (bookingPlace.some((book) => book.id === seat.id)) {
                   return (
                     <img
                       src={selectedSeat}
@@ -60,24 +51,19 @@ export default function SeatBooking() {
                 } else {
                   return (
                     <img
-                      src={redSeat}
+                      src={whiteSeat}
                       className="add-cart"
                       alt=""
                       id={seat.id}
-                      onClick={() => dispatch(addBooking(seat))}
+                      onClick={() => dispatch(addBooking(bookingFind))}
                     />
                   );
                 }
               }
 
               return (
-                <Booking.ListItem
-                  key={index}
-                  style={{
-                    opacity: seat.isAvailable ? "1" : "0",
-                  }}
-                >
-                  {booked()}
+                <Booking.ListItem key={index}>
+                  {seat.isAvailable ? booked() : <img src={redSeat} alt="" />}
                 </Booking.ListItem>
               );
             })}
