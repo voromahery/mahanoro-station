@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
+import { Booking } from "../components";
 import { displayModal } from "../actions/modal";
 import ModalContainer from "../containers/Modal";
 
@@ -10,29 +11,8 @@ export default function SeatBooking() {
   const { bookingId } = useParams();
   const booking = allData.find((data) => data.id === Number(bookingId));
   const filterSeat = booking.seats.filter((seat) => seat.isAvailable === true);
-  const seats = [
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-    "🪑",
-  ];
-  seats.length = filterSeat.length;
+  const seats = ["🪑"];
+  // seats.length = filterSeat.length;
 
   // Get the date
   const fullDate = new Date(booking.departureTime);
@@ -44,7 +24,7 @@ export default function SeatBooking() {
   console.log(openModal);
   const dispatch = useDispatch();
   return (
-    <>
+    <Booking>
       {openModal && <ModalContainer />}
       <h1>
         Book a seat to:<span>{booking.destination}</span>
@@ -52,11 +32,16 @@ export default function SeatBooking() {
       <div>
         <div>
           <h3>Pick a seat</h3>
-          <ul>
-            {seats.map((seat, index) => (
-              <li key={index}>{seat}</li>
+          <Booking.List>
+            {booking.seats.map((seat, index) => (
+              <Booking.ListItem
+                key={index}
+                className={!seat.isAvailable && "booked"}
+              >
+                {seats}
+              </Booking.ListItem>
             ))}
-          </ul>
+          </Booking.List>
           <div>
             <h3>Trip informations:</h3>
             <ul>
@@ -88,6 +73,6 @@ export default function SeatBooking() {
           </div>
         </div>
       </div>
-    </>
+    </Booking>
   );
 }

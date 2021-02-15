@@ -6,7 +6,9 @@ export default function AccountContainer() {
   const firstName = useSelector((state) => state.user.firstName);
   const lastName = useSelector((state) => state.user.lastName);
   const phone = useSelector((state) => state.user.phone);
-  console.log(firstName);
+  function updateUser(e) {
+    e.preventDefault();
+  }
   return (
     <Account>
       <Account.Heading>
@@ -41,7 +43,7 @@ export default function AccountContainer() {
             />
           </Account.Label>
         </Account.Wrapper>
-        <Account.Update>Update</Account.Update>
+        <Account.Update onSubmit={updateUser}>Update</Account.Update>
       </Account.Form>
       <Account>
         <Account.Title>My bookings:</Account.Title>

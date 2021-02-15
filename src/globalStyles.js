@@ -10,6 +10,18 @@ ul {
     margin: 0
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.booked {
+    opacity: 0;
+}
+
 button {
     cursor: pointer;
 }

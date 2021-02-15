@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Header from "./containers/HeaderContainer";
+import Headers from "./containers/HeaderContainer";
 import PlaceOptionContainer from "./pages/PlaceOption";
 import NextTrip from "./pages/NextTrip";
 import SeatBooking from "./pages/SeatBooking";
@@ -9,7 +9,7 @@ import AccountContainer from "./pages/Account";
 function App() {
   return (
     <>
-      <Header />
+      <Headers />
       <Switch>
         <Route exact path="/">
           <PlaceOptionContainer />

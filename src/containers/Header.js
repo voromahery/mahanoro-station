@@ -1,10 +1,21 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Header } from "../components";
 
-export default function Header({ getData, data }) {
+export default function Headers({ getData, data }) {
   useEffect(() => {
     getData();
   }, []);
 
   console.log(data);
-  return <h1>Mahanoro Station</h1>;
+  return (
+    <Header>
+      <Link to="/">
+        <Header.Heading>Mahanoro Station</Header.Heading>
+      </Link>
+      <Link to="/account">
+        <Header.Account>My account</Header.Account>
+      </Link>
+    </Header>
+  );
 }

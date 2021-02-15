@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getData } from '../actions/data';
-import Header from './Header';
+import Headers from './Header';
 
 function mapStateToProps(state) {
     console.log(state);
@@ -13,4 +13,4 @@ const mapDispatchToProps = {
 	getData,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Headers);
