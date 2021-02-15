@@ -38527,7 +38527,77 @@ PlaceOption.Button = function PlaceOptionButton({
 }) {
   return /*#__PURE__*/_react.default.createElement(_placeOption.Button, restProps, children);
 };
-},{"react":"node_modules/react/index.js","./styles/placeOption":"src/components/placeOption/styles/placeOption.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/placeOption":"src/components/placeOption/styles/placeOption.js"}],"src/components/modal/styles/modal.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Button = exports.Close = exports.Paragraph = exports.Heading = exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.div``;
+exports.Container = Container;
+const Heading = _styledComponents.default.h1``;
+exports.Heading = Heading;
+const Paragraph = _styledComponents.default.p``;
+exports.Paragraph = Paragraph;
+const Close = _styledComponents.default.button``;
+exports.Close = Close;
+const Button = _styledComponents.default.button``;
+exports.Button = Button;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/modal/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Modal;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _modal = require("./styles/modal");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Modal({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_modal.Container, restProps, children);
+}
+
+Modal.Heading = function ModalHeading({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_modal.Heading, restProps, children);
+};
+
+Modal.Paragraph = function ModalParagraph({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_modal.Paragraph, restProps, children);
+};
+
+Modal.Close = function ModalClose({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_modal.Close, restProps, children);
+};
+
+Modal.Button = function ModalButton({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_modal.Button, restProps, children);
+};
+},{"react":"node_modules/react/index.js","./styles/modal":"src/components/modal/styles/modal.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38539,11 +38609,19 @@ Object.defineProperty(exports, "PlaceOption", {
     return _placeOption.default;
   }
 });
+Object.defineProperty(exports, "Modal", {
+  enumerable: true,
+  get: function () {
+    return _modal.default;
+  }
+});
 
 var _placeOption = _interopRequireDefault(require("./placeOption"));
 
+var _modal = _interopRequireDefault(require("./modal"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./placeOption":"src/components/placeOption/index.js"}],"src/pages/PlaceOption.js":[function(require,module,exports) {
+},{"./placeOption":"src/components/placeOption/index.js","./modal":"src/components/modal/index.js"}],"src/pages/PlaceOption.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56904,23 +56982,29 @@ function displayModal() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Modal;
+exports.default = ModalContainer;
 
 var _react = _interopRequireDefault(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
 
 var _reactRedux = require("react-redux");
 
 var _modal = require("../actions/modal");
 
+var _components = require("../components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Modal() {
+function ModalContainer() {
   const dispatch = (0, _reactRedux.useDispatch)();
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("button", {
+  return /*#__PURE__*/_react.default.createElement(_components.Modal, null, /*#__PURE__*/_react.default.createElement(_components.Modal.Close, {
     onClick: () => dispatch((0, _modal.displayModal)(false))
-  }, "CLEAR"), /*#__PURE__*/_react.default.createElement("h1", null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement("p", null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement("button", null, "Check your account"));
+  }, "CLEAR"), /*#__PURE__*/_react.default.createElement(_components.Modal.Heading, null, "Booking comfirmed!"), /*#__PURE__*/_react.default.createElement(_components.Modal.Paragraph, null, "Thank you for trusting our services. Your booking has been added to your account. You can review it there."), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/account"
+  }, /*#__PURE__*/_react.default.createElement(_components.Modal.Button, null, "Check your account")));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js"}],"src/pages/SeatBooking.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js","../components":"src/components/index.js"}],"src/pages/SeatBooking.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56965,7 +57049,22 @@ function SeatBooking() {
     onClick: () => dispatch((0, _modal.displayModal)(true))
   }, "Book ", /*#__PURE__*/_react.default.createElement("span", null, "2"), " seats"), /*#__PURE__*/_react.default.createElement("p", null, "Total: 40000 Ar")))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js"}],"src/pages/Account.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Account;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Account() {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "ACCOUNT"));
+}
+},{"react":"node_modules/react/index.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56985,6 +57084,8 @@ var _NextTrip = _interopRequireDefault(require("./pages/NextTrip"));
 
 var _SeatBooking = _interopRequireDefault(require("./pages/SeatBooking"));
 
+var _Account = _interopRequireDefault(require("./pages/Account"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
@@ -56997,12 +57098,15 @@ function App() {
   }, /*#__PURE__*/_react.default.createElement(_NextTrip.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/booking/:bookingId"
-  }, /*#__PURE__*/_react.default.createElement(_SeatBooking.default, null))));
+  }, /*#__PURE__*/_react.default.createElement(_SeatBooking.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    exact: true,
+    path: "/account"
+  }, /*#__PURE__*/_react.default.createElement(_Account.default, null))));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./containers/HeaderContainer":"src/containers/HeaderContainer.js","./pages/PlaceOption":"src/pages/PlaceOption.js","./pages/NextTrip":"src/pages/NextTrip.js","./pages/SeatBooking":"src/pages/SeatBooking.js"}],"src/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./containers/HeaderContainer":"src/containers/HeaderContainer.js","./pages/PlaceOption":"src/pages/PlaceOption.js","./pages/NextTrip":"src/pages/NextTrip.js","./pages/SeatBooking":"src/pages/SeatBooking.js","./pages/Account":"src/pages/Account.js"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -57052,7 +57156,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50427" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49992" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

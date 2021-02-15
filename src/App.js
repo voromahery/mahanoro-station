@@ -4,6 +4,7 @@ import Header from "./containers/HeaderContainer";
 import PlaceOptionContainer from "./pages/PlaceOption";
 import NextTrip from "./pages/NextTrip";
 import SeatBooking from "./pages/SeatBooking";
+import Account from "./pages/Account";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route exact path="/booking/:bookingId">
           <SeatBooking />
+        </Route>
+        <Route exact path="/account">
+          <Account />
         </Route>
       </Switch>
     </>
