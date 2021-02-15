@@ -1,8 +1,14 @@
 import React from "react";
-import { Account } from "../components";
 import { useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
+import { Account } from "../components";
 
 export default function AccountContainer() {
+  // const { bookingId } = useParams();
+  // const allData = useSelector((state) => state.data);
+  // const bookingFind = allData.find((data) => data.id === Number(bookingId));
+  // console.log(bookingFind);
+
   const firstName = useSelector((state) => state.user.firstName);
   const lastName = useSelector((state) => state.user.lastName);
   const phone = useSelector((state) => state.user.phone);

@@ -17,6 +17,13 @@ export default function SeatBooking() {
   const bookingPlace = useSelector((state) => state.booking);
   const price = bookingPlace.length * bookingFind.price;
 
+  // let bookingObj = {
+  //   time: bookingFind.departureTime,
+  //   id: bookingFind.departureTime,
+  //   place: bookingFind.destination,
+  // };
+
+  // bookingPlace.push(bookingObj);
   console.log(bookingPlace);
 
   // Get the date
@@ -38,10 +45,9 @@ export default function SeatBooking() {
           <Booking.Title>Pick a seat</Booking.Title>
           <Booking.Seats>
             {bookingFind.seats.map((seat, index) => {
-              
               // Changing the appearance of the chairs
               function booked() {
-                if (bookingPlace.some((book) => book.id === seat.id)) {
+                if (bookingPlace.some((book) => book.id === seat.id && bookingFind.id)) {
                   return (
                     <img
                       src={selectedSeat}
@@ -106,7 +112,9 @@ export default function SeatBooking() {
             </Booking.Wrapper>
             <Booking.Button onClick={() => dispatch(displayModal(true))}>
               Book
-              <Booking.ButtonSpan>{bookingPlace.length}</Booking.ButtonSpan>{" "}
+              <Booking.ButtonSpan>
+                {bookingPlace.length}
+              </Booking.ButtonSpan>{" "}
               seats
             </Booking.Button>
             <Booking.Total>Total: {price} Ar</Booking.Total>
