@@ -6,6 +6,7 @@ export const Seats = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   max-width: max-content;
+  grid-gap: 12px;
 `;
 
 export const ListItem = styled.li``;

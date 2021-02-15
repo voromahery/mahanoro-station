@@ -7,8 +7,8 @@ import { displayModal } from "../actions/modal";
 import ModalContainer from "../containers/Modal";
 import { addBooking, cancelBooking } from "../actions/booking";
 import redSeat from "../icons/redSeat.svg";
-// import selectedSeat from "../icons/selectedSeat.svg";
-// import whiteSeat from "../icons/whiteSeat.svg";
+import selectedSeat from "../icons/selectedSeat.svg";
+import whiteSeat from "../icons/whiteSeat.svg";
 
 export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
@@ -16,7 +16,7 @@ export default function SeatBooking() {
   const booking = allData.find((data) => data.id === Number(bookingId));
   const bookingPlace = useSelector((state) => state.booking);
   const price = bookingPlace.length * booking.price;
-  const seats = ["🪑"];
+
   // Get the date
   const fullDate = new Date(booking.departureTime);
   const hour = fullDate.getHours();
@@ -25,29 +25,6 @@ export default function SeatBooking() {
   const openModal = useSelector((state) => state.displayModal);
   const dispatch = useDispatch();
 
-  // function booked() {
-  //   if (bookingPlace.some((book) => book.id === song.id)) {
-  //     return (
-  //       <img
-  //         src={addCartIcon}
-  //         className="add-cart"
-  //         alt=""
-  //         id={song.id}
-  //         onClick={() => dispatch(cancelBooking(song.id))}
-  //       />
-  //     );
-  //   } else {
-  //     return (
-  //       <img
-  //         src={cartIcon}
-  //         className="add-cart"
-  //         alt=""
-  //         id={song.id}
-  //         onClick={() => dispatch(addBooking(song))}
-  //       />
-  //     );
-  //   }
-  // }
   return (
     <Booking>
       {openModal && <ModalContainer />}
@@ -58,17 +35,44 @@ export default function SeatBooking() {
         <Booking.Wrapper>
           <Booking.Title>Pick a seat</Booking.Title>
           <Booking.Seats>
-            {booking.seats.map((seat, index) => (
-              <Booking.ListItem
-                onClick={() => dispatch(addBooking(seat.id))}
-                key={index}
-                style={{
-                  opacity: seat.isAvailable ? "1" : "0",
-                }}
-              >
-                {seats}
-              </Booking.ListItem>
-            ))}
+            {booking.seats.map((seat, index) => {
+
+              // Changing the appearance of the chairs
+              function booked() {
+                if (bookingPlace.some((book) => book.id === seat.id)) {
+                  return (
+                    <img
+                      src={selectedSeat}
+                      className="add-cart"
+                      alt=""
+                      id={seat.id}
+                      onClick={() => dispatch(cancelBooking(seat.id))}
+                    />
+                  );
+                } else {
+                  return (
+                    <img
+                      src={redSeat}
+                      className="add-cart"
+                      alt=""
+                      id={seat.id}
+                      onClick={() => dispatch(addBooking(seat))}
+                    />
+                  );
+                }
+              }
+              return (
+                <Booking.ListItem
+                  onClick={() => dispatch(addBooking(seat.id))}
+                  key={index}
+                  style={{
+                    opacity: seat.isAvailable ? "1" : "0",
+                  }}
+                >
+                  {booked()}
+                </Booking.ListItem>
+              );
+            })}
           </Booking.Seats>
           <Booking.Wrapper>
             <Booking.Title>Trip informations:</Booking.Title>

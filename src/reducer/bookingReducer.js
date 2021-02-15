@@ -3,7 +3,9 @@ function booking(state = [], action) {
     case "ADD_BOOKING":
       return [...state, action.payload];
     case "CANCEL_BOOKING":
-      return state.filter((item) => item.id !== action.payload);
+      const filterArr = state.filter((item) => item.id !== action.payload);
+      console.log(filterArr, "FILTER");
+      return filterArr;
     default:
       return state;
   }
