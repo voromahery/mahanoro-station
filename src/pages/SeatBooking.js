@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Booking } from "../components";
 import { displayModal } from "../actions/modal";
 import ModalContainer from "../containers/Modal";
-import { addBooking } from "../actions/booking";
+import { addBooking, cancelBooking } from "../actions/booking";
+import redSeat from "../icons/redSeat.svg";
+// import selectedSeat from "../icons/selectedSeat.svg";
+// import whiteSeat from "../icons/whiteSeat.svg";
 
 export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
@@ -14,21 +17,25 @@ export default function SeatBooking() {
   const bookingPlace = useSelector((state) => state.booking);
   const price = bookingPlace.length * booking.price;
   const seats = ["🪑"];
-  // seats.length = filterSeat.length;
-
   // Get the date
   const fullDate = new Date(booking.departureTime);
   const hour = fullDate.getHours();
   const minute = fullDate.getMinutes();
   const date = `${format(fullDate, "dd/MM/yyyy")}`;
-
   const openModal = useSelector((state) => state.displayModal);
   const dispatch = useDispatch();
-  // function bookingPlace() {
-  //   if (cartItem.some((cart) => cart.id === song.id)) {
+
+  // function booked() {
+  //   if (bookingPlace.some((book) => book.id === song.id)) {
   //     return (
-  //       <p onClick={() => dispatch(addBooking(booking.id))}>BOOK</p>
-  //     )
+  //       <img
+  //         src={addCartIcon}
+  //         className="add-cart"
+  //         alt=""
+  //         id={song.id}
+  //         onClick={() => dispatch(cancelBooking(song.id))}
+  //       />
+  //     );
   //   } else {
   //     return (
   //       <img
@@ -36,12 +43,11 @@ export default function SeatBooking() {
   //         className="add-cart"
   //         alt=""
   //         id={song.id}
-  //         onClick={() => dispatch(addToCart(song))}
+  //         onClick={() => dispatch(addBooking(song))}
   //       />
   //     );
   //   }
   // }
-
   return (
     <Booking>
       {openModal && <ModalContainer />}
@@ -88,11 +94,13 @@ export default function SeatBooking() {
             </Booking.Info>
             <Booking.Wrapper>
               <Booking.Price>
-                {booking.price}<Booking.Span>Ar</Booking.Span>/seat
+                {booking.price}
+                <Booking.Span>Ar</Booking.Span>/seat
               </Booking.Price>
             </Booking.Wrapper>
             <Booking.Button onClick={() => dispatch(displayModal(true))}>
-              Book <Booking.ButtonSpan>{bookingPlace.length}</Booking.ButtonSpan>{" "}
+              Book{" "}
+              <Booking.ButtonSpan>{bookingPlace.length}</Booking.ButtonSpan>{" "}
               seats
             </Booking.Button>
             <Booking.Total>Total: {price} Ar</Booking.Total>

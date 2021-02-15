@@ -48,11 +48,11 @@ export default function AccountContainer() {
       <Account>
         <Account.Title>My bookings:</Account.Title>
         <Account.Wrapper>
-          {booking.map((book, index) => (
+          {/* {booking.map((book, index) => (
             <div>
               <div key={index}>{book}</div>
             </div>
-          ))}
+          ))} */}
   
           {/* <Account.Text>Destination</Account.Text>
           <Account.Text>Date, time</Account.Text>

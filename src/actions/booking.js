@@ -4,3 +4,10 @@ export function addBooking(seat) {
     payload: seat,
   };
 }
+
+export function cancelBooking(seat) {
+  return {
+    type: "CANCEL_BOOKING",
+    payload: seat,
+  };
+}
