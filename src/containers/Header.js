@@ -7,7 +7,6 @@ export default function Headers({ getData, data }) {
     getData();
   }, []);
 
-  console.log(data);
   return (
     <Header>
       <Link to="/">

@@ -38360,8 +38360,7 @@ function booking(state = [], action) {
 
     case "CANCEL_BOOKING":
       const filterArr = state.filter(item => item.id !== action.payload);
-      console.log(filterArr, "FILTER");
-      return filterArr;
+      return [...filterArr];
 
     default:
       return state;
@@ -39015,7 +39014,6 @@ function Headers({
   (0, _react.useEffect)(() => {
     getData();
   }, []);
-  console.log(data);
   return /*#__PURE__*/_react.default.createElement(_components.Header, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
   }, /*#__PURE__*/_react.default.createElement(_components.Header.Heading, null, "Mahanoro Station")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
@@ -39039,7 +39037,6 @@ var _Header = _interopRequireDefault(require("./Header"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     data: state.data
   };
@@ -57502,17 +57499,18 @@ function SeatBooking() {
   const {
     bookingId
   } = (0, _reactRouterDom.useParams)();
-  const booking = allData.find(data => data.id === Number(bookingId));
+  const bookingFind = allData.find(data => data.id === Number(bookingId));
   const bookingPlace = (0, _reactRedux.useSelector)(state => state.booking);
-  const price = bookingPlace.length * booking.price; // Get the date
+  const price = bookingPlace.length * bookingFind.price;
+  console.log(bookingPlace); // Get the date
 
-  const fullDate = new Date(booking.departureTime);
+  const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
   const minute = fullDate.getMinutes();
   const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`;
   const openModal = (0, _reactRedux.useSelector)(state => state.displayModal);
   const dispatch = (0, _reactRedux.useDispatch)();
-  return /*#__PURE__*/_react.default.createElement(_components.Booking, null, openModal && /*#__PURE__*/_react.default.createElement(_Modal.default, null), /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Book a seat to:", /*#__PURE__*/_react.default.createElement("span", null, booking.destination)), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Pick a seat"), /*#__PURE__*/_react.default.createElement(_components.Booking.Seats, null, booking.seats.map((seat, index) => {
+  return /*#__PURE__*/_react.default.createElement(_components.Booking, null, openModal && /*#__PURE__*/_react.default.createElement(_Modal.default, null), /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Book a seat to:", /*#__PURE__*/_react.default.createElement("span", null, bookingFind.destination)), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Pick a seat"), /*#__PURE__*/_react.default.createElement(_components.Booking.Seats, null, bookingFind.seats.map((seat, index) => {
     // Changing the appearance of the chairs
     function booked() {
       if (bookingPlace.some(book => book.id === seat.id)) {
@@ -57535,15 +57533,14 @@ function SeatBooking() {
     }
 
     return /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, {
-      onClick: () => dispatch((0, _booking.addBooking)(seat.id)),
       key: index,
       style: {
         opacity: seat.isAvailable ? "1" : "0"
       }
     }, booked());
-  })), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Trip informations:"), /*#__PURE__*/_react.default.createElement(_components.Booking.Info, null, /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Departure time:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, `${hour}:${minute}, ${date}`)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.driverName)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver's contact:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.driverContact)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Estimated duration:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.estimatedDuration)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Breaks: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, booking.breaks))), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Price, null, booking.price, /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, "Ar"), "/seat")), /*#__PURE__*/_react.default.createElement(_components.Booking.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Trip informations:"), /*#__PURE__*/_react.default.createElement(_components.Booking.Info, null, /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Departure time:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, `${hour}:${minute}, ${date}`)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.driverName)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver's contact:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.driverContact)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Estimated duration:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.estimatedDuration)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Breaks: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.breaks))), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Price, null, bookingFind.price, /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, "Ar"), "/seat")), /*#__PURE__*/_react.default.createElement(_components.Booking.Button, {
     onClick: () => dispatch((0, _modal.displayModal)(true))
-  }, "Book", " ", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, bookingPlace.length), " ", "seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: ", price, " Ar")))));
+  }, "Book", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, bookingPlace.length), " ", "seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: ", price, " Ar")))));
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js","../actions/booking":"src/actions/booking.js","../icons/redSeat.svg":"src/icons/redSeat.svg","../icons/selectedSeat.svg":"src/icons/selectedSeat.svg","../icons/whiteSeat.svg":"src/icons/whiteSeat.svg"}],"src/pages/Account.js":[function(require,module,exports) {
 "use strict";

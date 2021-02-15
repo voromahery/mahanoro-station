@@ -13,12 +13,14 @@ import whiteSeat from "../icons/whiteSeat.svg";
 export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
   const { bookingId } = useParams();
-  const booking = allData.find((data) => data.id === Number(bookingId));
+  const bookingFind = allData.find((data) => data.id === Number(bookingId));
   const bookingPlace = useSelector((state) => state.booking);
-  const price = bookingPlace.length * booking.price;
+  const price = bookingPlace.length * bookingFind.price;
+
+  console.log(bookingPlace);
 
   // Get the date
-  const fullDate = new Date(booking.departureTime);
+  const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
   const minute = fullDate.getMinutes();
   const date = `${format(fullDate, "dd/MM/yyyy")}`;
@@ -29,14 +31,14 @@ export default function SeatBooking() {
     <Booking>
       {openModal && <ModalContainer />}
       <Booking.Title>
-        Book a seat to:<span>{booking.destination}</span>
+        Book a seat to:<span>{bookingFind.destination}</span>
       </Booking.Title>
       <Booking.Wrapper>
         <Booking.Wrapper>
           <Booking.Title>Pick a seat</Booking.Title>
           <Booking.Seats>
-            {booking.seats.map((seat, index) => {
-
+            {bookingFind.seats.map((seat, index) => {
+              
               // Changing the appearance of the chairs
               function booked() {
                 if (bookingPlace.some((book) => book.id === seat.id)) {
@@ -61,9 +63,9 @@ export default function SeatBooking() {
                   );
                 }
               }
+
               return (
                 <Booking.ListItem
-                  onClick={() => dispatch(addBooking(seat.id))}
                   key={index}
                   style={{
                     opacity: seat.isAvailable ? "1" : "0",
@@ -82,28 +84,28 @@ export default function SeatBooking() {
                 <Booking.Span>{`${hour}:${minute}, ${date}`}</Booking.Span>
               </Booking.ListItem>
               <Booking.ListItem>
-                Driver: <Booking.Span>{booking.driverName}</Booking.Span>
+                Driver: <Booking.Span>{bookingFind.driverName}</Booking.Span>
               </Booking.ListItem>
               <Booking.ListItem>
                 Driver's contact:
-                <Booking.Span>{booking.driverContact}</Booking.Span>
+                <Booking.Span>{bookingFind.driverContact}</Booking.Span>
               </Booking.ListItem>
               <Booking.ListItem>
                 Estimated duration:
-                <Booking.Span>{booking.estimatedDuration}</Booking.Span>
+                <Booking.Span>{bookingFind.estimatedDuration}</Booking.Span>
               </Booking.ListItem>
               <Booking.ListItem>
-                Breaks: <Booking.Span>{booking.breaks}</Booking.Span>
+                Breaks: <Booking.Span>{bookingFind.breaks}</Booking.Span>
               </Booking.ListItem>
             </Booking.Info>
             <Booking.Wrapper>
               <Booking.Price>
-                {booking.price}
+                {bookingFind.price}
                 <Booking.Span>Ar</Booking.Span>/seat
               </Booking.Price>
             </Booking.Wrapper>
             <Booking.Button onClick={() => dispatch(displayModal(true))}>
-              Book{" "}
+              Book
               <Booking.ButtonSpan>{bookingPlace.length}</Booking.ButtonSpan>{" "}
               seats
             </Booking.Button>
