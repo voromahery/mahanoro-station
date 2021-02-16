@@ -5,27 +5,29 @@ import { Account } from "../components";
 import { user } from "../actions/user";
 
 export default function AccountContainer() {
+  const dispatch = useDispatch();
+
   const booking = useSelector((state) => state.booking);
   const defaultUser = useSelector((state) => state.user);
-  const dispatch = useDispatch()
 
+  // Get the firstName, lastName and phone
   const [firstName, setFirstName] = useState(defaultUser.firstName);
   const [lastName, setLastName] = useState(defaultUser.lastName);
   const [phone, setPhone] = useState(defaultUser.phone);
-
   const price = booking.length;
+
+  // Edit user identity
   function updateUser(e) {
     e.preventDefault();
-    const form = e.currentTarget;
-    console.log(form);
     const changeUser = {
       firstName,
       lastName,
       phone,
     };
+
     dispatch(user(changeUser));
-    console.log(changeUser);
   }
+
   return (
     <Account>
       <Account.Heading>

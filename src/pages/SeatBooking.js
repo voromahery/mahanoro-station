@@ -16,7 +16,12 @@ export default function SeatBooking() {
   const bookingFind = allData.find((data) => data.id === Number(bookingId));
   let bookingPlace = useSelector((state) => state.booking);
   const price = bookingPlace.length * bookingFind.price;
-console.log(bookingPlace);
+  
+  console.log(bookingPlace);
+
+  const info = {
+    bookingFind
+  }
   // Get the date
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
@@ -36,8 +41,7 @@ console.log(bookingPlace);
           <Booking.Title>Pick a seat</Booking.Title>
           <Booking.Seats>
             {bookingFind.seats.map((seat, index) => {
-              // Changing the appearance of the chairs
-  
+              // Changing the appearance of the chairsz
               function booked() {
                 if (bookingPlace.some((book) => book.id === seat.id)) {
                   return (
@@ -45,6 +49,7 @@ console.log(bookingPlace);
                       src={selectedSeat}
                       alt=""
                       id={seat.id}
+                      style={{cursor: "pointer"}}
                       onClick={() => dispatch(cancelBooking(seat.id))}
                     />
                   );
@@ -54,6 +59,7 @@ console.log(bookingPlace);
                       src={whiteSeat}
                       alt=""
                       id={seat.id}
+                      style={{cursor: "pointer"}}
                       onClick={() => dispatch(addBooking(seat))}
                     />
                   );
@@ -62,7 +68,7 @@ console.log(bookingPlace);
 
               return (
                 <Booking.ListItem key={index}>
-                  {seat.isAvailable ? booked() : <img src={redSeat} alt="" />}
+                  {seat.isAvailable ? booked() : <img src={redSeat} style={{cursor: "not-allowed"}} alt="" />}
                 </Booking.ListItem>
               );
             })}

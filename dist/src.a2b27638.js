@@ -38317,12 +38317,6 @@ function user(state = null, action) {
   switch (action.type) {
     case "USER":
       return action.payload;
-    // case "CHANGE_FIRSTNAME":
-    //   return { firstName: action.payload };
-    // case "CHANGE_LASTNAME":
-    //   return { lastName: action.payload };
-    // case "CHANGE_NUMBER":
-    //   return { phone: action.payload };
 
     default:
       return state;
@@ -57523,7 +57517,10 @@ function SeatBooking() {
   const bookingFind = allData.find(data => data.id === Number(bookingId));
   let bookingPlace = (0, _reactRedux.useSelector)(state => state.booking);
   const price = bookingPlace.length * bookingFind.price;
-  console.log(bookingPlace); // Get the date
+  console.log(bookingPlace);
+  const info = {
+    bookingFind
+  }; // Get the date
 
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
@@ -57532,13 +57529,16 @@ function SeatBooking() {
   const openModal = (0, _reactRedux.useSelector)(state => state.displayModal);
   const dispatch = (0, _reactRedux.useDispatch)();
   return /*#__PURE__*/_react.default.createElement(_components.Booking, null, openModal && /*#__PURE__*/_react.default.createElement(_Modal.default, null), /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Book a seat to:", /*#__PURE__*/_react.default.createElement("span", null, bookingFind.destination)), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Pick a seat"), /*#__PURE__*/_react.default.createElement(_components.Booking.Seats, null, bookingFind.seats.map((seat, index) => {
-    // Changing the appearance of the chairs
+    // Changing the appearance of the chairsz
     function booked() {
       if (bookingPlace.some(book => book.id === seat.id)) {
         return /*#__PURE__*/_react.default.createElement("img", {
           src: _selectedSeat.default,
           alt: "",
           id: seat.id,
+          style: {
+            cursor: "pointer"
+          },
           onClick: () => dispatch((0, _booking.cancelBooking)(seat.id))
         });
       } else {
@@ -57546,6 +57546,9 @@ function SeatBooking() {
           src: _whiteSeat.default,
           alt: "",
           id: seat.id,
+          style: {
+            cursor: "pointer"
+          },
           onClick: () => dispatch((0, _booking.addBooking)(seat))
         });
       }
@@ -57555,6 +57558,9 @@ function SeatBooking() {
       key: index
     }, seat.isAvailable ? booked() : /*#__PURE__*/_react.default.createElement("img", {
       src: _redSeat.default,
+      style: {
+        cursor: "not-allowed"
+      },
       alt: ""
     }));
   })), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Trip informations:"), /*#__PURE__*/_react.default.createElement(_components.Booking.Info, null, /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Departure time:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, `${hour}:${minute}, ${date}`)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.driverName)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver's contact:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.driverContact)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Estimated duration:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.estimatedDuration)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Breaks: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.breaks))), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Price, null, bookingFind.price, /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, "Ar"), "/seat")), /*#__PURE__*/_react.default.createElement(_components.Booking.Button, {
@@ -57574,24 +57580,7 @@ function user(user) {
     type: "USER",
     payload: user
   };
-} // export function firstName(firstname) {
-//   return {
-//     type: "CHANGE_FIRSTNAME",
-//     payload: firstname,
-//   };
-// }
-// export function lastName(lastname) {
-//   return {
-//     type: "CHANGE_LASTNAME",
-//     payload: lastname,
-//   };
-// }
-// export function phone(number) {
-//   return {
-//     type: "CHANGE_NUMBER",
-//     payload: number,
-//   };
-// }
+}
 },{}],"src/pages/Account.js":[function(require,module,exports) {
 "use strict";
 
@@ -57615,25 +57604,23 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function AccountContainer() {
-  const booking = (0, _reactRedux.useSelector)(state => state.booking);
-  const defaultUser = (0, _reactRedux.useSelector)(state => state.user);
   const dispatch = (0, _reactRedux.useDispatch)();
+  const booking = (0, _reactRedux.useSelector)(state => state.booking);
+  const defaultUser = (0, _reactRedux.useSelector)(state => state.user); // Get the firstName, lastName and phone
+
   const [firstName, setFirstName] = (0, _react.useState)(defaultUser.firstName);
   const [lastName, setLastName] = (0, _react.useState)(defaultUser.lastName);
   const [phone, setPhone] = (0, _react.useState)(defaultUser.phone);
-  const price = booking.length;
+  const price = booking.length; // Edit user identity
 
   function updateUser(e) {
     e.preventDefault();
-    const form = e.currentTarget;
-    console.log(form);
     const changeUser = {
       firstName,
       lastName,
       phone
     };
     dispatch((0, _user.user)(changeUser));
-    console.log(changeUser);
   }
 
   return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Heading, null, "My account ", /*#__PURE__*/_react.default.createElement(_components.Account.Span, null, firstName)), /*#__PURE__*/_react.default.createElement(_components.Account.Form, {
@@ -57750,7 +57737,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49826" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51528" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
