@@ -57386,7 +57386,7 @@ function NextTrip() {
     place
   } = (0, _reactRouterDom.useParams)();
   const dataFilter = allData.filter(data => data.destination === place);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Next trips to:", /*#__PURE__*/_react.default.createElement("span", null, dataFilter[0].destination)), dataFilter.map(data => {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Next trips to:", /*#__PURE__*/_react.default.createElement("span", null, place)), dataFilter.map(data => {
     // Get the number of the available seats
     const seats = data.seats.filter(seat => seat.isAvailable === true);
     const numberOfSeats = seats.length; // Get the date format
@@ -57528,11 +57528,11 @@ function SeatBooking() {
   const userBooks = (0, _reactRedux.useSelector)(state => state.user.bookedPlace); // Adding data to the userdata
 
   const bookingInfo = {
-    date: bookingFind.departureTime,
-    time: bookingFind.departureTime,
+    id: bookingFind.departureTime,
     destination: bookingFind.destination,
-    numberOfSeats: bookingPlace.length
-  };
+    price: bookingFind.price
+  }; // Fixed the number of the data in the userBooks
+
   userBooks.push(bookingInfo);
   userBooks.length = bookingPlace.length;
   console.log(userBooks);
@@ -57614,19 +57614,69 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function AccountContainer() {
   const dispatch = (0, _reactRedux.useDispatch)();
   const userBooks = (0, _reactRedux.useSelector)(state => state.user.bookedPlace);
-  const defaultUser = (0, _reactRedux.useSelector)(state => state.user); // Get the firstName, lastName and phone
+  const defaultUser = (0, _reactRedux.useSelector)(state => state.user);
+  const filterTana1 = userBooks.filter(data => data.destination === "Antananarivo" && data.id === 1613570400);
+  const filterTana2 = userBooks.filter(data => data.destination === "Antananarivo" && data.id === 1613397600);
+  const filterVatomandry1 = userBooks.filter(data => data.destination === "Vatomandry" && data.id === 1613570400);
+  const filterVatomandry2 = userBooks.filter(data => data.destination === "Vatomandry" && data.time === 1613397600);
+  const filterMoramanga1 = userBooks.filter(data => data.destination === "Moramanga" && data.id === 1613570400);
+  const filterMoramanga2 = userBooks.filter(data => data.destination === "Moramanga" && data.id === 1613397600);
+  const filterToamasina1 = userBooks.filter(data => data.destination === "Toamasina" && data.id === 1613570400);
+  const filterToamasina2 = userBooks.filter(data => data.destination === "Toamasina" && data.id === 1613397600);
+  const tana1 = filterTana1.reduce((acc, val) => acc + val.price, 0);
+  const tana2 = filterTana2.reduce((acc, val) => acc + val.price, 0);
+  const toamasina1 = filterToamasina1.reduce((acc, val) => acc + val.price, 0);
+  const toamasina2 = filterToamasina2.reduce((acc, val) => acc + val.price, 0);
+  const moramanga1 = filterMoramanga1.reduce((acc, val) => acc + val.price, 0);
+  const moramanga2 = filterMoramanga2.reduce((acc, val) => acc + val.price, 0);
+  const vatomandry1 = filterVatomandry1.reduce((acc, val) => acc + val.price, 0);
+  const vatomandry2 = filterVatomandry2.reduce((acc, val) => acc + val.price, 0);
+  const allBookedPlace = [{
+    item: filterTana1,
+    destination: "Antananarivo",
+    price: tana1
+  }, {
+    item: filterTana2,
+    destination: "Antananarivo",
+    price: tana2
+  }, {
+    item: filterToamasina1,
+    destination: "Toamasina",
+    price: toamasina1
+  }, {
+    item: filterToamasina2,
+    destination: "Toamasina",
+    price: toamasina2
+  }, {
+    item: filterMoramanga1,
+    destination: "Moramanga",
+    price: moramanga1
+  }, {
+    item: filterMoramanga2,
+    destination: "moramanga",
+    price: moramanga2
+  }, {
+    item: filterVatomandry1,
+    destination: "Vatomandry",
+    price: vatomandry1
+  }, {
+    item: filterVatomandry2,
+    destination: "Vatomandry",
+    price: vatomandry1
+  }];
+  console.log(allBookedPlace); // Get the firstName, lastName and phone
 
   const [firstName, setFirstName] = (0, _react.useState)(defaultUser.firstName);
   const [lastName, setLastName] = (0, _react.useState)(defaultUser.lastName);
-  const [phone, setPhone] = (0, _react.useState)(defaultUser.phone); // const price = booking.length;
-  // Edit user identity
+  const [phone, setPhone] = (0, _react.useState)(defaultUser.phone); // Edit user identity
 
   function updateUser(e) {
     e.preventDefault();
     const changeUser = {
       firstName,
       lastName,
-      phone
+      phone,
+      bookedPlace: userBooks
     };
     dispatch((0, _user.user)(changeUser));
   }
@@ -57651,7 +57701,19 @@ function AccountContainer() {
     type: "phone",
     value: phone,
     onChange: e => setPhone(e.target.value)
-  }))), /*#__PURE__*/_react.default.createElement(_components.Account.Update, null, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null)));
+  }))), /*#__PURE__*/_react.default.createElement(_components.Account.Update, null, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, allBookedPlace.map((book, index) => {
+    // const fullDate = new Date(book.item.date);
+    // const hour = fullDate.getHours();
+    // const minute = fullDate.getMinutes();
+    // const date = `${format(fullDate, "dd/MM/yyyy")}`;
+    // console.log(data[0]);
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: index,
+      style: {
+        display: book.item.length === 0 && "none"
+      }
+    }, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.destination), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.item.length, " seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, null, "Cancel"));
+  }))));
 }
 },{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/user":"src/actions/user.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
@@ -57745,7 +57807,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54272" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57182" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

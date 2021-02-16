@@ -11,7 +11,7 @@ export default function NextTrip() {
   return (
     <>
       <h1>
-        Next trips to:<span>{dataFilter[0].destination}</span>
+        Next trips to:<span>{place}</span>
       </h1>
       {dataFilter.map((data) => {
         // Get the number of the available seats

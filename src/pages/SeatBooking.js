@@ -15,7 +15,7 @@ export default function SeatBooking() {
   const { bookingId } = useParams();
   const dispatch = useDispatch();
   const bookingFind = allData.find((data) => data.id === Number(bookingId));
-  
+
   // Get the date
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
@@ -29,12 +29,11 @@ export default function SeatBooking() {
 
   // Adding data to the userdata
   const bookingInfo = {
-    date: bookingFind.departureTime,
-    time: bookingFind.departureTime,
+    id: bookingFind.departureTime,
     destination: bookingFind.destination,
-    numberOfSeats: bookingPlace.length,
+    price: bookingFind.price
   };
-  
+  // Fixed the number of the data in the userBooks
   userBooks.push(bookingInfo);
   userBooks.length = bookingPlace.length;
   console.log(userBooks);
