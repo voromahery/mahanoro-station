@@ -16,7 +16,7 @@ export default function SeatBooking() {
   const bookingFind = allData.find((data) => data.id === Number(bookingId));
   let bookingPlace = useSelector((state) => state.booking);
   const price = bookingPlace.length * bookingFind.price;
-
+console.log(bookingPlace);
   // Get the date
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
@@ -37,12 +37,12 @@ export default function SeatBooking() {
           <Booking.Seats>
             {bookingFind.seats.map((seat, index) => {
               // Changing the appearance of the chairs
+  
               function booked() {
                 if (bookingPlace.some((book) => book.id === seat.id)) {
                   return (
                     <img
                       src={selectedSeat}
-                      className="add-cart"
                       alt=""
                       id={seat.id}
                       onClick={() => dispatch(cancelBooking(seat.id))}
@@ -52,10 +52,9 @@ export default function SeatBooking() {
                   return (
                     <img
                       src={whiteSeat}
-                      className="add-cart"
                       alt=""
                       id={seat.id}
-                      onClick={() => dispatch(addBooking(bookingFind))}
+                      onClick={() => dispatch(addBooking(seat))}
                     />
                   );
                 }

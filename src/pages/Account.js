@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
 import { Account } from "../components";
-import { useSelector } from "react-redux";
+import { user } from "../actions/user";
 
 export default function AccountContainer() {
   const booking = useSelector((state) => state.booking);
-  const firstName = useSelector((state) => state.user.firstName);
-  const lastName = useSelector((state) => state.user.lastName);
-  const phone = useSelector((state) => state.user.phone);
+  const defaultUser = useSelector((state) => state.user);
+  const dispatch = useDispatch()
+
+  const [firstName, setFirstName] = useState(defaultUser.firstName);
+  const [lastName, setLastName] = useState(defaultUser.lastName);
+  const [phone, setPhone] = useState(defaultUser.phone);
+
   const price = booking.length;
   function updateUser(e) {
     e.preventDefault();
+    const form = e.currentTarget;
+    console.log(form);
+    const changeUser = {
+      firstName,
+      lastName,
+      phone,
+    };
+    dispatch(user(changeUser));
+    console.log(changeUser);
   }
   return (
     <Account>
       <Account.Heading>
         My account <Account.Span>{firstName}</Account.Span>
       </Account.Heading>
-      <Account.Form>
+      <Account.Form onSubmit={updateUser}>
         <Account.Wrapper
           style={{ display: "flex", flexDirection: "column", gap: "20px" }}
         >
@@ -26,7 +40,7 @@ export default function AccountContainer() {
             <Account.Input
               type="text"
               value={firstName}
-              onChange={(e) => e.target.value}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </Account.Label>
           <Account.Label>
@@ -34,7 +48,7 @@ export default function AccountContainer() {
             <Account.Input
               type="text"
               value={lastName}
-              onChange={(e) => e.target.value}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </Account.Label>
           <Account.Label>
@@ -42,16 +56,16 @@ export default function AccountContainer() {
             <Account.Input
               type="phone"
               value={phone}
-              onChange={(e) => e.target.value}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </Account.Label>
         </Account.Wrapper>
-        <Account.Update onSubmit={updateUser}>Update</Account.Update>
+        <Account.Update>Update</Account.Update>
       </Account.Form>
       <Account>
         <Account.Title>My bookings:</Account.Title>
         <Account.Wrapper>
-          {booking.map((book, index) => {
+          {/* {booking.map((book, index) => {
             const fullDate = new Date(book.departureTime);
             const hour = fullDate.getHours();
             const minute = fullDate.getMinutes();
@@ -68,7 +82,7 @@ export default function AccountContainer() {
                 <Account.Cancel>Cancel</Account.Cancel>
               </div>
             );
-          })}
+          })} */}
         </Account.Wrapper>
       </Account>
     </Account>

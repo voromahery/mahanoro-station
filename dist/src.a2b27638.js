@@ -38316,22 +38316,13 @@ exports.default = void 0;
 function user(state = null, action) {
   switch (action.type) {
     case "USER":
-      return state;
-
-    case "CHANGE_FIRSTNAME":
-      return {
-        firstName: action.payload
-      };
-
-    case "CHANGE_LASTNAME":
-      return {
-        lastName: action.payload
-      };
-
-    case "CHANGE_NUMBER":
-      return {
-        phone: action.payload
-      };
+      return action.payload;
+    // case "CHANGE_FIRSTNAME":
+    //   return { firstName: action.payload };
+    // case "CHANGE_LASTNAME":
+    //   return { lastName: action.payload };
+    // case "CHANGE_NUMBER":
+    //   return { phone: action.payload };
 
     default:
       return state;
@@ -57531,7 +57522,8 @@ function SeatBooking() {
   } = (0, _reactRouterDom.useParams)();
   const bookingFind = allData.find(data => data.id === Number(bookingId));
   let bookingPlace = (0, _reactRedux.useSelector)(state => state.booking);
-  const price = bookingPlace.length * bookingFind.price; // Get the date
+  const price = bookingPlace.length * bookingFind.price;
+  console.log(bookingPlace); // Get the date
 
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
@@ -57545,7 +57537,6 @@ function SeatBooking() {
       if (bookingPlace.some(book => book.id === seat.id)) {
         return /*#__PURE__*/_react.default.createElement("img", {
           src: _selectedSeat.default,
-          className: "add-cart",
           alt: "",
           id: seat.id,
           onClick: () => dispatch((0, _booking.cancelBooking)(seat.id))
@@ -57553,10 +57544,9 @@ function SeatBooking() {
       } else {
         return /*#__PURE__*/_react.default.createElement("img", {
           src: _whiteSeat.default,
-          className: "add-cart",
           alt: "",
           id: seat.id,
-          onClick: () => dispatch((0, _booking.addBooking)(bookingFind))
+          onClick: () => dispatch((0, _booking.addBooking)(seat))
         });
       }
     }
@@ -57571,7 +57561,38 @@ function SeatBooking() {
     onClick: () => dispatch((0, _modal.displayModal)(true))
   }, "Book", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, bookingPlace.length), " ", "seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: ", price, " Ar")))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js","../actions/booking":"src/actions/booking.js","../icons/redSeat.svg":"src/icons/redSeat.svg","../icons/selectedSeat.svg":"src/icons/selectedSeat.svg","../icons/whiteSeat.svg":"src/icons/whiteSeat.svg"}],"src/pages/Account.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js","../actions/booking":"src/actions/booking.js","../icons/redSeat.svg":"src/icons/redSeat.svg","../icons/selectedSeat.svg":"src/icons/selectedSeat.svg","../icons/whiteSeat.svg":"src/icons/whiteSeat.svg"}],"src/actions/user.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.user = user;
+
+function user(user) {
+  return {
+    type: "USER",
+    payload: user
+  };
+} // export function firstName(firstname) {
+//   return {
+//     type: "CHANGE_FIRSTNAME",
+//     payload: firstname,
+//   };
+// }
+// export function lastName(lastname) {
+//   return {
+//     type: "CHANGE_LASTNAME",
+//     payload: lastname,
+//   };
+// }
+// export function phone(number) {
+//   return {
+//     type: "CHANGE_NUMBER",
+//     payload: number,
+//   };
+// }
+},{}],"src/pages/Account.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57579,28 +57600,45 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = AccountContainer;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
 
 var _dateFns = require("date-fns");
 
 var _components = require("../components");
 
-var _reactRedux = require("react-redux");
+var _user = require("../actions/user");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function AccountContainer() {
   const booking = (0, _reactRedux.useSelector)(state => state.booking);
-  const firstName = (0, _reactRedux.useSelector)(state => state.user.firstName);
-  const lastName = (0, _reactRedux.useSelector)(state => state.user.lastName);
-  const phone = (0, _reactRedux.useSelector)(state => state.user.phone);
+  const defaultUser = (0, _reactRedux.useSelector)(state => state.user);
+  const dispatch = (0, _reactRedux.useDispatch)();
+  const [firstName, setFirstName] = (0, _react.useState)(defaultUser.firstName);
+  const [lastName, setLastName] = (0, _react.useState)(defaultUser.lastName);
+  const [phone, setPhone] = (0, _react.useState)(defaultUser.phone);
   const price = booking.length;
 
   function updateUser(e) {
     e.preventDefault();
+    const form = e.currentTarget;
+    console.log(form);
+    const changeUser = {
+      firstName,
+      lastName,
+      phone
+    };
+    dispatch((0, _user.user)(changeUser));
+    console.log(changeUser);
   }
 
-  return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Heading, null, "My account ", /*#__PURE__*/_react.default.createElement(_components.Account.Span, null, firstName)), /*#__PURE__*/_react.default.createElement(_components.Account.Form, null, /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, {
+  return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Heading, null, "My account ", /*#__PURE__*/_react.default.createElement(_components.Account.Span, null, firstName)), /*#__PURE__*/_react.default.createElement(_components.Account.Form, {
+    onSubmit: updateUser
+  }, /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, {
     style: {
       display: "flex",
       flexDirection: "column",
@@ -57609,26 +57647,18 @@ function AccountContainer() {
   }, /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "First name", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
     type: "text",
     value: firstName,
-    onChange: e => e.target.value
+    onChange: e => setFirstName(e.target.value)
   })), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Last name", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
     type: "text",
     value: lastName,
-    onChange: e => e.target.value
+    onChange: e => setLastName(e.target.value)
   })), /*#__PURE__*/_react.default.createElement(_components.Account.Label, null, "Phone number", /*#__PURE__*/_react.default.createElement(_components.Account.Input, {
     type: "phone",
     value: phone,
-    onChange: e => e.target.value
-  }))), /*#__PURE__*/_react.default.createElement(_components.Account.Update, {
-    onSubmit: updateUser
-  }, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, booking.map((book, index) => {
-    const fullDate = new Date(book.departureTime);
-    const hour = fullDate.getHours();
-    const minute = fullDate.getMinutes();
-    const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`;
-    return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.destination), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, `${date}, ${hour}:${minute}`), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.length, " seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, null, "Cancel"));
-  }))));
+    onChange: e => setPhone(e.target.value)
+  }))), /*#__PURE__*/_react.default.createElement(_components.Account.Update, null, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null)));
 }
-},{"react":"node_modules/react/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","react-redux":"node_modules/react-redux/es/index.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/user":"src/actions/user.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57720,7 +57750,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56358" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49826" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

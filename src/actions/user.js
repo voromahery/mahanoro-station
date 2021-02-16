@@ -5,23 +5,23 @@ export function user(user) {
   };
 }
 
-export function firstName(firstname) {
-  return {
-    type: "CHANGE_FIRSTNAME",
-    payload: firstname,
-  };
-}
+// export function firstName(firstname) {
+//   return {
+//     type: "CHANGE_FIRSTNAME",
+//     payload: firstname,
+//   };
+// }
 
-export function lastName(lastname) {
-  return {
-    type: "CHANGE_LASTNAME",
-    payload: lastname,
-  };
-}
+// export function lastName(lastname) {
+//   return {
+//     type: "CHANGE_LASTNAME",
+//     payload: lastname,
+//   };
+// }
 
-export function phone(number) {
-  return {
-    type: "CHANGE_NUMBER",
-    payload: number,
-  };
-}
+// export function phone(number) {
+//   return {
+//     type: "CHANGE_NUMBER",
+//     payload: number,
+//   };
+// }
