@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { format } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
+import { format } from "date-fns";
 import { Booking } from "../components";
 import { displayModal } from "../actions/modal";
 import ModalContainer from "../containers/Modal";
@@ -13,6 +13,7 @@ import whiteSeat from "../icons/whiteSeat.svg";
 export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
   const { bookingId } = useParams();
+  const dispatch = useDispatch();
   const bookingFind = allData.find((data) => data.id === Number(bookingId));
   
   // Get the date
@@ -27,16 +28,16 @@ export default function SeatBooking() {
   const userBooks = useSelector((state) => state.user.bookedPlace);
 
   // Adding data to the userdata
-  const info = {
+  const bookingInfo = {
     date: bookingFind.departureTime,
     time: bookingFind.departureTime,
     destination: bookingFind.destination,
     numberOfSeats: bookingPlace.length,
   };
-
-  userBooks.push(info);
-  const dispatch = useDispatch();
-
+  
+  userBooks.push(bookingInfo);
+  userBooks.length = bookingPlace.length;
+  console.log(userBooks);
   return (
     <Booking>
       {openModal && <ModalContainer />}

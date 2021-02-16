@@ -57490,9 +57490,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
-var _dateFns = require("date-fns");
-
 var _reactRedux = require("react-redux");
+
+var _dateFns = require("date-fns");
 
 var _components = require("../components");
 
@@ -57515,6 +57515,7 @@ function SeatBooking() {
   const {
     bookingId
   } = (0, _reactRouterDom.useParams)();
+  const dispatch = (0, _reactRedux.useDispatch)();
   const bookingFind = allData.find(data => data.id === Number(bookingId)); // Get the date
 
   const fullDate = new Date(bookingFind.departureTime);
@@ -57526,14 +57527,15 @@ function SeatBooking() {
   const price = bookingPlace.length * bookingFind.price;
   const userBooks = (0, _reactRedux.useSelector)(state => state.user.bookedPlace); // Adding data to the userdata
 
-  const info = {
+  const bookingInfo = {
     date: bookingFind.departureTime,
     time: bookingFind.departureTime,
     destination: bookingFind.destination,
     numberOfSeats: bookingPlace.length
   };
-  userBooks.push(info);
-  const dispatch = (0, _reactRedux.useDispatch)();
+  userBooks.push(bookingInfo);
+  userBooks.length = bookingPlace.length;
+  console.log(userBooks);
   return /*#__PURE__*/_react.default.createElement(_components.Booking, null, openModal && /*#__PURE__*/_react.default.createElement(_Modal.default, null), /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Book a seat to:", /*#__PURE__*/_react.default.createElement("span", null, bookingFind.destination)), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Pick a seat"), /*#__PURE__*/_react.default.createElement(_components.Booking.Seats, null, bookingFind.seats.map((seat, index) => {
     // Changing the appearance of the chairsz
     function booked() {
@@ -57573,7 +57575,7 @@ function SeatBooking() {
     onClick: () => dispatch((0, _modal.displayModal)(true))
   }, "Book", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, " ", bookingPlace.length, " "), "seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: ", price, " Ar")))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js","../actions/booking":"src/actions/booking.js","../icons/redSeat.svg":"src/icons/redSeat.svg","../icons/selectedSeat.svg":"src/icons/selectedSeat.svg","../icons/whiteSeat.svg":"src/icons/whiteSeat.svg"}],"src/actions/user.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js","../actions/booking":"src/actions/booking.js","../icons/redSeat.svg":"src/icons/redSeat.svg","../icons/selectedSeat.svg":"src/icons/selectedSeat.svg","../icons/whiteSeat.svg":"src/icons/whiteSeat.svg"}],"src/actions/user.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57743,7 +57745,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53495" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54272" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
