@@ -16,12 +16,18 @@ export default function SeatBooking() {
   const bookingFind = allData.find((data) => data.id === Number(bookingId));
   let bookingPlace = useSelector((state) => state.booking);
   const price = bookingPlace.length * bookingFind.price;
-  
-  console.log(bookingPlace);
+  const userBooks = useSelector((state) => state.user.bookedPlace);
+
+  console.log(userBooks);
 
   const info = {
-    bookingFind
+    date: bookingFind.departureTime,
+    time: bookingFind.departureTime,
+    destination: bookingFind.destination,
+    numberOfSeats: bookingPlace.length,
   }
+
+userBooks.push(info)
   // Get the date
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
@@ -49,7 +55,7 @@ export default function SeatBooking() {
                       src={selectedSeat}
                       alt=""
                       id={seat.id}
-                      style={{cursor: "pointer"}}
+                      style={{ cursor: "pointer" }}
                       onClick={() => dispatch(cancelBooking(seat.id))}
                     />
                   );
@@ -59,7 +65,7 @@ export default function SeatBooking() {
                       src={whiteSeat}
                       alt=""
                       id={seat.id}
-                      style={{cursor: "pointer"}}
+                      style={{ cursor: "pointer" }}
                       onClick={() => dispatch(addBooking(seat))}
                     />
                   );
@@ -68,7 +74,15 @@ export default function SeatBooking() {
 
               return (
                 <Booking.ListItem key={index}>
-                  {seat.isAvailable ? booked() : <img src={redSeat} style={{cursor: "not-allowed"}} alt="" />}
+                  {seat.isAvailable ? (
+                    booked()
+                  ) : (
+                    <img
+                      src={redSeat}
+                      style={{ cursor: "not-allowed" }}
+                      alt=""
+                    />
+                  )}
                 </Booking.ListItem>
               );
             })}
@@ -103,9 +117,7 @@ export default function SeatBooking() {
             </Booking.Wrapper>
             <Booking.Button onClick={() => dispatch(displayModal(true))}>
               Book
-              <Booking.ButtonSpan>
-                {bookingPlace.length}
-              </Booking.ButtonSpan>{" "}
+              <Booking.ButtonSpan> {bookingPlace.length} </Booking.ButtonSpan>
               seats
             </Booking.Button>
             <Booking.Total>Total: {price} Ar</Booking.Total>

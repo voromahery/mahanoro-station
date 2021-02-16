@@ -5,6 +5,7 @@ export default {
     firstName: "Fabrice",
     lastName: "Daniel",
     phone: "0342364876",
+    bookedPlace: [],
   },
   booking: [],
 };

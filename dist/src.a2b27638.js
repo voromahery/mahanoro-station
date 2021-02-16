@@ -38280,7 +38280,8 @@ var _default = {
   user: {
     firstName: "Fabrice",
     lastName: "Daniel",
-    phone: "0342364876"
+    phone: "0342364876",
+    bookedPlace: []
   },
   booking: []
 };
@@ -39081,7 +39082,7 @@ var _components = require("../components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function PlaceOptionContainer() {
-  const places = ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"];
+  const places = ["Antananarivo", "Moramanga", "Vatomandry", "Toamasina"];
   return /*#__PURE__*/_react.default.createElement(_components.PlaceOption, null, /*#__PURE__*/_react.default.createElement(_components.PlaceOption.Heading, null, "Where are you going?"), /*#__PURE__*/_react.default.createElement(_components.PlaceOption.List, null, places.map((place, index) => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     key: place[index],
     to: `/nextTrip/${place}`
@@ -57517,10 +57518,15 @@ function SeatBooking() {
   const bookingFind = allData.find(data => data.id === Number(bookingId));
   let bookingPlace = (0, _reactRedux.useSelector)(state => state.booking);
   const price = bookingPlace.length * bookingFind.price;
-  console.log(bookingPlace);
+  const userBooks = (0, _reactRedux.useSelector)(state => state.user.bookedPlace);
+  console.log(userBooks);
   const info = {
-    bookingFind
-  }; // Get the date
+    date: bookingFind.departureTime,
+    time: bookingFind.departureTime,
+    destination: bookingFind.destination,
+    numberOfSeats: bookingPlace.length
+  };
+  userBooks.push(info); // Get the date
 
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
@@ -57565,7 +57571,7 @@ function SeatBooking() {
     }));
   })), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Trip informations:"), /*#__PURE__*/_react.default.createElement(_components.Booking.Info, null, /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Departure time:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, `${hour}:${minute}, ${date}`)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.driverName)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Driver's contact:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.driverContact)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Estimated duration:", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.estimatedDuration)), /*#__PURE__*/_react.default.createElement(_components.Booking.ListItem, null, "Breaks: ", /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, bookingFind.breaks))), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Price, null, bookingFind.price, /*#__PURE__*/_react.default.createElement(_components.Booking.Span, null, "Ar"), "/seat")), /*#__PURE__*/_react.default.createElement(_components.Booking.Button, {
     onClick: () => dispatch((0, _modal.displayModal)(true))
-  }, "Book", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, bookingPlace.length), " ", "seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: ", price, " Ar")))));
+  }, "Book", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, " ", bookingPlace.length, " "), "seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: ", price, " Ar")))));
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js","../actions/booking":"src/actions/booking.js","../icons/redSeat.svg":"src/icons/redSeat.svg","../icons/selectedSeat.svg":"src/icons/selectedSeat.svg","../icons/whiteSeat.svg":"src/icons/whiteSeat.svg"}],"src/actions/user.js":[function(require,module,exports) {
 "use strict";
@@ -57737,7 +57743,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51528" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52942" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { PlaceOption } from "../components";
 
 export default function PlaceOptionContainer() {
-  const places = ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"];
+  const places = ["Antananarivo", "Moramanga", "Vatomandry", "Toamasina"];
 
   return (
     <PlaceOption>
