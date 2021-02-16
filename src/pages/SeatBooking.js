@@ -33,6 +33,7 @@ export default function SeatBooking() {
     destination: bookingFind.destination,
     price: bookingFind.price
   };
+
   // Fixed the number of the data in the userBooks
   userBooks.push(bookingInfo);
   userBooks.length = bookingPlace.length;
