@@ -14,26 +14,27 @@ export default function SeatBooking() {
   const allData = useSelector((state) => state.data);
   const { bookingId } = useParams();
   const bookingFind = allData.find((data) => data.id === Number(bookingId));
-  let bookingPlace = useSelector((state) => state.booking);
-  const price = bookingPlace.length * bookingFind.price;
-  const userBooks = useSelector((state) => state.user.bookedPlace);
-
-  console.log(userBooks);
-
-  const info = {
-    date: bookingFind.departureTime,
-    time: bookingFind.departureTime,
-    destination: bookingFind.destination,
-    numberOfSeats: bookingPlace.length,
-  }
-
-userBooks.push(info)
+  
   // Get the date
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
   const minute = fullDate.getMinutes();
   const date = `${format(fullDate, "dd/MM/yyyy")}`;
   const openModal = useSelector((state) => state.displayModal);
+
+  const bookingPlace = useSelector((state) => state.booking);
+  const price = bookingPlace.length * bookingFind.price;
+  const userBooks = useSelector((state) => state.user.bookedPlace);
+
+  // Adding data to the userdata
+  const info = {
+    date: bookingFind.departureTime,
+    time: bookingFind.departureTime,
+    destination: bookingFind.destination,
+    numberOfSeats: bookingPlace.length,
+  };
+
+  userBooks.push(info);
   const dispatch = useDispatch();
 
   return (

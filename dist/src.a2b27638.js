@@ -57515,24 +57515,24 @@ function SeatBooking() {
   const {
     bookingId
   } = (0, _reactRouterDom.useParams)();
-  const bookingFind = allData.find(data => data.id === Number(bookingId));
-  let bookingPlace = (0, _reactRedux.useSelector)(state => state.booking);
-  const price = bookingPlace.length * bookingFind.price;
-  const userBooks = (0, _reactRedux.useSelector)(state => state.user.bookedPlace);
-  console.log(userBooks);
-  const info = {
-    date: bookingFind.departureTime,
-    time: bookingFind.departureTime,
-    destination: bookingFind.destination,
-    numberOfSeats: bookingPlace.length
-  };
-  userBooks.push(info); // Get the date
+  const bookingFind = allData.find(data => data.id === Number(bookingId)); // Get the date
 
   const fullDate = new Date(bookingFind.departureTime);
   const hour = fullDate.getHours();
   const minute = fullDate.getMinutes();
   const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`;
   const openModal = (0, _reactRedux.useSelector)(state => state.displayModal);
+  const bookingPlace = (0, _reactRedux.useSelector)(state => state.booking);
+  const price = bookingPlace.length * bookingFind.price;
+  const userBooks = (0, _reactRedux.useSelector)(state => state.user.bookedPlace); // Adding data to the userdata
+
+  const info = {
+    date: bookingFind.departureTime,
+    time: bookingFind.departureTime,
+    destination: bookingFind.destination,
+    numberOfSeats: bookingPlace.length
+  };
+  userBooks.push(info);
   const dispatch = (0, _reactRedux.useDispatch)();
   return /*#__PURE__*/_react.default.createElement(_components.Booking, null, openModal && /*#__PURE__*/_react.default.createElement(_Modal.default, null), /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Book a seat to:", /*#__PURE__*/_react.default.createElement("span", null, bookingFind.destination)), /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Booking.Title, null, "Pick a seat"), /*#__PURE__*/_react.default.createElement(_components.Booking.Seats, null, bookingFind.seats.map((seat, index) => {
     // Changing the appearance of the chairsz
@@ -57611,13 +57611,13 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function AccountContainer() {
   const dispatch = (0, _reactRedux.useDispatch)();
-  const booking = (0, _reactRedux.useSelector)(state => state.booking);
+  const userBooks = (0, _reactRedux.useSelector)(state => state.user.bookedPlace);
   const defaultUser = (0, _reactRedux.useSelector)(state => state.user); // Get the firstName, lastName and phone
 
   const [firstName, setFirstName] = (0, _react.useState)(defaultUser.firstName);
   const [lastName, setLastName] = (0, _react.useState)(defaultUser.lastName);
-  const [phone, setPhone] = (0, _react.useState)(defaultUser.phone);
-  const price = booking.length; // Edit user identity
+  const [phone, setPhone] = (0, _react.useState)(defaultUser.phone); // const price = booking.length;
+  // Edit user identity
 
   function updateUser(e) {
     e.preventDefault();
@@ -57743,7 +57743,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52942" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53495" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -7,14 +7,14 @@ import { user } from "../actions/user";
 export default function AccountContainer() {
   const dispatch = useDispatch();
 
-  const booking = useSelector((state) => state.booking);
+  const userBooks = useSelector((state) => state.user.bookedPlace);
   const defaultUser = useSelector((state) => state.user);
 
   // Get the firstName, lastName and phone
   const [firstName, setFirstName] = useState(defaultUser.firstName);
   const [lastName, setLastName] = useState(defaultUser.lastName);
   const [phone, setPhone] = useState(defaultUser.phone);
-  const price = booking.length;
+  // const price = booking.length;
 
   // Edit user identity
   function updateUser(e) {
