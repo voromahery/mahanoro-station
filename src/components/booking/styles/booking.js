@@ -19,3 +19,4 @@ export const Total = styled.p``;
 export const Wrapper = styled.div``;
 export const Price = styled.div``;
 export const Span = styled.span``;
+export const Image = styled.img``;

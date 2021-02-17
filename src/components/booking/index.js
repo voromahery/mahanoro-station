@@ -11,6 +11,7 @@ import {
   Wrapper,
   Span,
   Price,
+  Image,
 } from "./styles/booking";
 
 export default function Booking({ children, ...restProps }) {
@@ -59,4 +60,8 @@ Booking.Price = function BookingPrice({ children, ...restProps }) {
 
 Booking.Span = function BookingSpan({ children, ...restProps }) {
   return <Span {...restProps}>{children}</Span>;
+};
+
+Booking.Image = function BookingImage({ ...restProps }) {
+  return <Image {...restProps} />;
 };

@@ -53,7 +53,7 @@ export default function SeatBooking() {
               function booked() {
                 if (bookingPlace.some((book) => book.id === seat.id)) {
                   return (
-                    <img
+                    <Booking.Image
                       src={selectedSeat}
                       alt=""
                       id={seat.id}
@@ -63,7 +63,7 @@ export default function SeatBooking() {
                   );
                 } else {
                   return (
-                    <img
+                    <Booking.Image
                       src={whiteSeat}
                       alt=""
                       id={seat.id}

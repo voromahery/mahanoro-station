@@ -38320,10 +38320,6 @@ function user(state = null, action) {
     case "USER":
       return action.payload;
 
-    case "CANCEL_BOOKING":
-      const filterArr = state.bookedPlace.filter(item => item.id !== action.payload);
-      return [...filterArr];
-
     default:
       return state;
   }
@@ -38363,10 +38359,10 @@ function booking(state = [], action) {
   switch (action.type) {
     case "ADD_BOOKING":
       return [...state, action.payload];
-    // case "CANCEL_BOOKING":
-    //   console.log(state.user);
-    //   const filterArr = state.filter((item) => item.id !== action.payload);
-    //   return [...filterArr];
+
+    case "CANCEL_BOOKING":
+      const filterArr = state.filter(item => item.id !== action.payload);
+      return [...filterArr];
 
     default:
       return state;
@@ -38395,7 +38391,6 @@ var _bookingReducer = _interopRequireDefault(require("./bookingReducer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import bookedPlace from './cancelBooking';
 const rootReducer = (0, _redux.combineReducers)({
   data: _dataReducer.default,
   user: _userReducer.default,
@@ -38512,7 +38507,7 @@ Header.Account = function HeaderAccount({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Span = exports.Price = exports.Wrapper = exports.Total = exports.ButtonSpan = exports.Button = exports.Info = exports.Title = exports.ListItem = exports.Seats = exports.Container = void 0;
+exports.Image = exports.Span = exports.Price = exports.Wrapper = exports.Total = exports.ButtonSpan = exports.Button = exports.Info = exports.Title = exports.ListItem = exports.Seats = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -38546,6 +38541,8 @@ const Price = _styledComponents.default.div``;
 exports.Price = Price;
 const Span = _styledComponents.default.span``;
 exports.Span = Span;
+const Image = _styledComponents.default.img``;
+exports.Image = Image;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/booking/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -38642,6 +38639,11 @@ Booking.Span = function BookingSpan({
   ...restProps
 }) {
   return /*#__PURE__*/_react.default.createElement(_booking.Span, restProps, children);
+};
+
+Booking.Image = function BookingImage({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_booking.Image, restProps);
 };
 },{"react":"node_modules/react/index.js","./styles/booking":"src/components/booking/styles/booking.js"}],"src/components/placeOption/styles/placeOption.js":[function(require,module,exports) {
 "use strict";
@@ -57546,7 +57548,7 @@ function SeatBooking() {
     // Changing the appearance of the chairsz
     function booked() {
       if (bookingPlace.some(book => book.id === seat.id)) {
-        return /*#__PURE__*/_react.default.createElement("img", {
+        return /*#__PURE__*/_react.default.createElement(_components.Booking.Image, {
           src: _selectedSeat.default,
           alt: "",
           id: seat.id,
@@ -57556,7 +57558,7 @@ function SeatBooking() {
           onClick: () => dispatch((0, _booking.cancelBooking)(seat.id))
         });
       } else {
-        return /*#__PURE__*/_react.default.createElement("img", {
+        return /*#__PURE__*/_react.default.createElement(_components.Booking.Image, {
           src: _whiteSeat.default,
           alt: "",
           id: seat.id,
@@ -57853,7 +57855,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49861" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50356" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
