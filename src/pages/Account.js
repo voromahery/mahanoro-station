@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
 import { Account } from "../components";
 import { user } from "../actions/user";
+import { cancelBooking } from "../actions/booking";
 
 export default function AccountContainer() {
   const dispatch = useDispatch();
@@ -10,21 +11,39 @@ export default function AccountContainer() {
   const defaultUser = useSelector((state) => state.user);
 
   // Antananarivo data
-  const filterTana1 = userBooks.filter((data) => data.destination === "Antananarivo" && data.id === 1613570400);
-  const filterTana2 = userBooks.filter((data) => data.destination === "Antananarivo" && data.id === 1613397600);
+  const filterTana1 = userBooks.filter(
+    (data) => data.destination === "Antananarivo" && data.id === 1613570400
+  );
+  const filterTana2 = userBooks.filter(
+    (data) => data.destination === "Antananarivo" && data.id === 1613397600
+  );
 
   // Vatomandry data
-  const filterVatomandry1 = userBooks.filter((data) => data.destination === "Vatomandry" && data.id === 1613570400);
-  const filterVatomandry2 = userBooks.filter((data) => data.destination === "Vatomandry" && data.id === 1613397600);
-  const filterVatomandry3 = userBooks.filter((data) => data.destination === "Vatomandry" && data.id === 1613829600);
+  const filterVatomandry1 = userBooks.filter(
+    (data) => data.destination === "Vatomandry" && data.id === 1613570400
+  );
+  const filterVatomandry2 = userBooks.filter(
+    (data) => data.destination === "Vatomandry" && data.id === 1613397600
+  );
+  const filterVatomandry3 = userBooks.filter(
+    (data) => data.destination === "Vatomandry" && data.id === 1613829600
+  );
 
   // Moramanga data 1613829600 1613397600
-  const filterMoramanga1 = userBooks.filter((data) => data.destination === "Moramanga" && data.id === 1613570400);
-  const filterMoramanga2 = userBooks.filter((data) => data.destination === "Moramanga" && data.id === 1613829600);
-  const filterMoramanga3 = userBooks.filter((data) => data.destination === "Moramanga" && data.id === 1613743200);
+  const filterMoramanga1 = userBooks.filter(
+    (data) => data.destination === "Moramanga" && data.id === 1613570400
+  );
+  const filterMoramanga2 = userBooks.filter(
+    (data) => data.destination === "Moramanga" && data.id === 1613829600
+  );
+  const filterMoramanga3 = userBooks.filter(
+    (data) => data.destination === "Moramanga" && data.id === 1613743200
+  );
 
   // Toamasina data
-  const filterToamasina1 = userBooks.filter((data) => data.destination === "Toamasina" && data.id === 1613397600);
+  const filterToamasina1 = userBooks.filter(
+    (data) => data.destination === "Toamasina" && data.id === 1613397600
+  );
 
   // Calculate the price of the bookings
   const tana1 = filterTana1.reduce((acc, val) => acc + val.price, 0);
@@ -33,67 +52,84 @@ export default function AccountContainer() {
   const moramanga1 = filterMoramanga1.reduce((acc, val) => acc + val.price, 0);
   const moramanga2 = filterMoramanga2.reduce((acc, val) => acc + val.price, 0);
   const moramanga3 = filterMoramanga3.reduce((acc, val) => acc + val.price, 0);
-  const vatomandry1 = filterVatomandry1.reduce((acc, val) => acc + val.price, 0);
-  const vatomandry2 = filterVatomandry2.reduce((acc, val) => acc + val.price, 0);
-  const vatomandry3 = filterVatomandry3.reduce((acc, val) => acc + val.price, 0);
+  const vatomandry1 = filterVatomandry1.reduce(
+    (acc, val) => acc + val.price,
+    0
+  );
+  const vatomandry2 = filterVatomandry2.reduce(
+    (acc, val) => acc + val.price,
+    0
+  );
+  const vatomandry3 = filterVatomandry3.reduce(
+    (acc, val) => acc + val.price,
+    0
+  );
 
   const allBookedPlace = [
     {
       item: filterTana1,
       destination: "Antananarivo",
       price: tana1,
-      id: 1613570400,
+      time: 1613570400,
+      id: 1,
     },
     {
       item: filterTana2,
       destination: "Antananarivo",
       price: tana2,
-      id: 1613397600,
+      time: 1613397600,
+      id: 2,
     },
     {
       item: filterToamasina1,
       destination: "Toamasina",
       price: toamasina1,
-      id: 1613397600,
+      time: 1613397600,
+      id: 3,
     },
     {
       item: filterMoramanga1,
       destination: "Moramanga",
       price: moramanga1,
-      id: 1613570400,
+      time: 1613570400,
+      id: 4,
     },
     {
       item: filterMoramanga2,
       destination: "Moramanga",
       price: moramanga2,
-      id: 1613829600,
+      time: 1613829600,
+      id: 5,
     },
     {
       item: filterMoramanga3,
       destination: "Moramanga",
       price: moramanga3,
-      id: 1613743200,
+      time: 1613743200,
+      id: 6,
     },
     {
       item: filterVatomandry1,
       destination: "Vatomandry",
       price: vatomandry1,
-      id: 1613570400,
+      time: 1613570400,
+      id: 7,
     },
     {
       item: filterVatomandry2,
       destination: "Vatomandry",
       price: vatomandry2,
-      id: 1613397600,
+      time: 1613397600,
+      id: 8,
     },
     {
       item: filterVatomandry3,
       destination: "Vatomandry",
       price: vatomandry3,
-      id: 1613829600,
+      time: 1613829600,
+      id: 9,
     },
   ];
-  console.log(allBookedPlace);
 
   // Get the firstName, lastName and phone
   const [firstName, setFirstName] = useState(defaultUser.firstName);
@@ -111,6 +147,14 @@ export default function AccountContainer() {
     };
 
     dispatch(user(changeUser));
+  }
+
+  function cancelBooking(e) {
+    const bookingId = Number(e.target.value);
+    const filterBooking = allBookedPlace.filter(
+      (data) => Number(data.id) !== bookingId
+    );
+    console.log(bookingId, filterBooking);
   }
 
   return (
@@ -153,14 +197,14 @@ export default function AccountContainer() {
         <Account.Title>My bookings:</Account.Title>
         <Account.Wrapper>
           {allBookedPlace.map((book, index) => {
-            const fullDate = new Date(book.id);
+            // Time converting
+            const fullDate = new Date(book.time);
             const hour = fullDate.getHours();
             const minute = fullDate.getMinutes();
             const date = `${format(fullDate, "dd/MM/yyyy")}`;
-
-            // console.log(data[0]);
             return (
               <div
+                id={book.id}
                 key={index}
                 style={{ display: book.item.length === 0 && "none" }}
               >
@@ -170,7 +214,9 @@ export default function AccountContainer() {
                   <Account.Text>{book.item.length} seats</Account.Text>
                   <Account.Text>{book.price} Ar</Account.Text>
                 </Account.Wrapper>
-                <Account.Cancel>Cancel</Account.Cancel>
+                <Account.Cancel value={book.id} onClick={cancelBooking}>
+                  Cancel
+                </Account.Cancel>
               </div>
             );
           })}

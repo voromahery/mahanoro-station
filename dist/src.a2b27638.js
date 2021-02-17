@@ -38315,9 +38315,14 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 function user(state = null, action) {
+  // import bookedPlace from './cancelBooking';
   switch (action.type) {
     case "USER":
       return action.payload;
+
+    case "CANCEL_BOOKING":
+      const filterArr = state.bookedPlace.filter(item => item.id !== action.payload);
+      return [...filterArr];
 
     default:
       return state;
@@ -38358,10 +38363,10 @@ function booking(state = [], action) {
   switch (action.type) {
     case "ADD_BOOKING":
       return [...state, action.payload];
-
-    case "CANCEL_BOOKING":
-      const filterArr = state.filter(item => item.id !== action.payload);
-      return [...filterArr];
+    // case "CANCEL_BOOKING":
+    //   console.log(state.user);
+    //   const filterArr = state.filter((item) => item.id !== action.payload);
+    //   return [...filterArr];
 
     default:
       return state;
@@ -38390,6 +38395,7 @@ var _bookingReducer = _interopRequireDefault(require("./bookingReducer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import bookedPlace from './cancelBooking';
 const rootReducer = (0, _redux.combineReducers)({
   data: _dataReducer.default,
   user: _userReducer.default,
@@ -57607,6 +57613,8 @@ var _components = require("../components");
 
 var _user = require("../actions/user");
 
+var _booking = require("../actions/booking");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -57642,49 +57650,57 @@ function AccountContainer() {
     item: filterTana1,
     destination: "Antananarivo",
     price: tana1,
-    id: 1613570400
+    time: 1613570400,
+    id: 1
   }, {
     item: filterTana2,
     destination: "Antananarivo",
     price: tana2,
-    id: 1613397600
+    time: 1613397600,
+    id: 2
   }, {
     item: filterToamasina1,
     destination: "Toamasina",
     price: toamasina1,
-    id: 1613397600
+    time: 1613397600,
+    id: 3
   }, {
     item: filterMoramanga1,
     destination: "Moramanga",
     price: moramanga1,
-    id: 1613570400
+    time: 1613570400,
+    id: 4
   }, {
     item: filterMoramanga2,
     destination: "Moramanga",
     price: moramanga2,
-    id: 1613829600
+    time: 1613829600,
+    id: 5
   }, {
     item: filterMoramanga3,
     destination: "Moramanga",
     price: moramanga3,
-    id: 1613743200
+    time: 1613743200,
+    id: 6
   }, {
     item: filterVatomandry1,
     destination: "Vatomandry",
     price: vatomandry1,
-    id: 1613570400
+    time: 1613570400,
+    id: 7
   }, {
     item: filterVatomandry2,
     destination: "Vatomandry",
     price: vatomandry2,
-    id: 1613397600
+    time: 1613397600,
+    id: 8
   }, {
     item: filterVatomandry3,
     destination: "Vatomandry",
     price: vatomandry3,
-    id: 1613829600
-  }];
-  console.log(allBookedPlace); // Get the firstName, lastName and phone
+    time: 1613829600,
+    id: 9
+  }]; // Get the firstName, lastName and phone
 
   const [firstName, setFirstName] = (0, _react.useState)(defaultUser.firstName);
   const [lastName, setLastName] = (0, _react.useState)(defaultUser.lastName);
@@ -57699,6 +57715,12 @@ function AccountContainer() {
       bookedPlace: userBooks
     };
     dispatch((0, _user.user)(changeUser));
+  }
+
+  function cancelBooking(e) {
+    const bookingId = Number(e.target.value);
+    const filterBooking = allBookedPlace.filter(data => Number(data.id) !== bookingId);
+    console.log(bookingId, filterBooking);
   }
 
   return /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Heading, null, "My account ", /*#__PURE__*/_react.default.createElement(_components.Account.Span, null, firstName)), /*#__PURE__*/_react.default.createElement(_components.Account.Form, {
@@ -57722,20 +57744,24 @@ function AccountContainer() {
     value: phone,
     onChange: e => setPhone(e.target.value)
   }))), /*#__PURE__*/_react.default.createElement(_components.Account.Update, null, "Update")), /*#__PURE__*/_react.default.createElement(_components.Account, null, /*#__PURE__*/_react.default.createElement(_components.Account.Title, null, "My bookings:"), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, allBookedPlace.map((book, index) => {
-    const fullDate = new Date(book.id);
+    // Time converting
+    const fullDate = new Date(book.time);
     const hour = fullDate.getHours();
     const minute = fullDate.getMinutes();
-    const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`; // console.log(data[0]);
-
+    const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`;
     return /*#__PURE__*/_react.default.createElement("div", {
+      id: book.id,
       key: index,
       style: {
         display: book.item.length === 0 && "none"
       }
-    }, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.destination), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, `${date}, ${hour}:${minute}`), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.item.length, " seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, null, "Cancel"));
+    }, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.destination), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, `${date}, ${hour}:${minute}`), /*#__PURE__*/_react.default.createElement(_components.Account.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.item.length, " seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, {
+      value: book.id,
+      onClick: cancelBooking
+    }, "Cancel"));
   }))));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/user":"src/actions/user.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/user":"src/actions/user.js","../actions/booking":"src/actions/booking.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57827,7 +57853,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59323" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49861" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
