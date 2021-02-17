@@ -39409,8 +39409,6 @@ exports.default = PlaceOptionContainer;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactRedux = require("react-redux");
-
 var _reactRouterDom = require("react-router-dom");
 
 var _components = require("../components");
@@ -39426,7 +39424,7 @@ function PlaceOptionContainer() {
     value: place
   }, place))))));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57762,6 +57760,28 @@ function displayModal() {
     type: "TOGGLE_MODAL"
   };
 }
+},{}],"src/actions/booking.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addBooking = addBooking;
+exports.cancelBooking = cancelBooking;
+
+function addBooking(seat) {
+  return {
+    type: "ADD_BOOKING",
+    payload: seat
+  };
+}
+
+function cancelBooking(seat) {
+  return {
+    type: "CANCEL_BOOKING",
+    payload: seat
+  };
+}
 },{}],"src/containers/Modal.js":[function(require,module,exports) {
 "use strict";
 
@@ -57792,29 +57812,7 @@ function ModalContainer() {
     onClick: () => dispatch((0, _modal.displayModal)(false))
   }, "Check your account"))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js","../components":"src/components/index.js"}],"src/actions/booking.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.addBooking = addBooking;
-exports.cancelBooking = cancelBooking;
-
-function addBooking(seat) {
-  return {
-    type: "ADD_BOOKING",
-    payload: seat
-  };
-}
-
-function cancelBooking(seat) {
-  return {
-    type: "CANCEL_BOOKING",
-    payload: seat
-  };
-}
-},{}],"src/icons/redSeat.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js","../actions/modal":"src/actions/modal.js","../components":"src/components/index.js"}],"src/icons/redSeat.svg":[function(require,module,exports) {
 module.exports = "/redSeat.cac20f87.svg";
 },{}],"src/icons/selectedSeat.svg":[function(require,module,exports) {
 module.exports = "/selectedSeat.cb7359a9.svg";
@@ -57840,9 +57838,9 @@ var _components = require("../components");
 
 var _modal = require("../actions/modal");
 
-var _Modal = _interopRequireDefault(require("../containers/Modal"));
-
 var _booking = require("../actions/booking");
+
+var _Modal = _interopRequireDefault(require("../containers/Modal"));
 
 var _redSeat = _interopRequireDefault(require("../icons/redSeat.svg"));
 
@@ -57917,7 +57915,7 @@ function SeatBooking() {
     onClick: () => dispatch((0, _modal.displayModal)(true))
   }, "Book", /*#__PURE__*/_react.default.createElement(_components.Booking.ButtonSpan, null, " ", bookingPlace.length, " "), "seats"), /*#__PURE__*/_react.default.createElement(_components.Booking.Total, null, "Total: ", price, " Ar"))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../containers/Modal":"src/containers/Modal.js","../actions/booking":"src/actions/booking.js","../icons/redSeat.svg":"src/icons/redSeat.svg","../icons/selectedSeat.svg":"src/icons/selectedSeat.svg","../icons/whiteSeat.svg":"src/icons/whiteSeat.svg"}],"src/actions/user.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/modal":"src/actions/modal.js","../actions/booking":"src/actions/booking.js","../containers/Modal":"src/containers/Modal.js","../icons/redSeat.svg":"src/icons/redSeat.svg","../icons/selectedSeat.svg":"src/icons/selectedSeat.svg","../icons/whiteSeat.svg":"src/icons/whiteSeat.svg"}],"src/actions/user.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
