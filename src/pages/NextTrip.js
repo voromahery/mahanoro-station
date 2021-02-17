@@ -2,8 +2,9 @@ import React from "react";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { NextTrip } from "../components";
 
-export default function NextTrip() {
+export default function NextTripContainer() {
   const allData = useSelector((state) => state.data);
   const { place } = useParams();
   const dataFilter = allData.filter((data) => data.destination === place);
@@ -25,19 +26,22 @@ export default function NextTrip() {
         const minute = fullDate.getMinutes();
         const date = `${format(fullDate, "dd/MM/yyyy")}`;
         return (
-          <div key={data.id}>
-            <div>
-              <span>{day}</span>
-              <span>{`${hour}:${minute}`}</span>
-            </div>
-            <div>
-              <span>{date}</span>
-              <div><span>{numberOfSeats}</span>{numberOfSeats > 0 ? "seats left": "seat left"}</div>
-            </div>
+          <NextTrip key={data.id}>
+            <NextTrip.Wrapper>
+              <NextTrip.Date>{day}</NextTrip.Date>
+              <NextTrip.Date>{`${hour}:${minute}`}</NextTrip.Date>
+            </NextTrip.Wrapper>
+            <NextTrip.Wrapper>
+              <NextTrip.Date>{date}</NextTrip.Date>
+              <NextTrip.Wrapper>
+                <NextTrip.Seat>{numberOfSeats}</NextTrip.Seat>
+                {numberOfSeats > 0 ? "seats left" : "seat left"}
+              </NextTrip.Wrapper>
+            </NextTrip.Wrapper>
             <Link to={`/booking/${data.id}`}>
-              <button disabled={numberOfSeats === 0}>Book a seat</button>
+              <NextTrip.Button disabled={numberOfSeats === 0}>Book a seat</NextTrip.Button>
             </Link>
-          </div>
+          </NextTrip>
         );
       })}
     </>

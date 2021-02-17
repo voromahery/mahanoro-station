@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Headers from "./containers/HeaderContainer";
 import PlaceOptionContainer from "./pages/PlaceOption";
-import NextTrip from "./pages/NextTrip";
+import NextTripContainer from "./pages/NextTrip";
 import SeatBooking from "./pages/SeatBooking";
 import AccountContainer from "./pages/Account";
 
@@ -15,7 +15,7 @@ function App() {
           <PlaceOptionContainer />
         </Route>
         <Route exact path="/nextTrip/:place">
-          <NextTrip />
+          <NextTripContainer />
         </Route>
         <Route exact path="/booking/:bookingId">
           <SeatBooking />

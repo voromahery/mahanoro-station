@@ -38315,7 +38315,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 function user(state = null, action) {
-  // import bookedPlace from './cancelBooking';
   switch (action.type) {
     case "USER":
       return action.payload;
@@ -38645,7 +38644,77 @@ Booking.Image = function BookingImage({ ...restProps
 }) {
   return /*#__PURE__*/_react.default.createElement(_booking.Image, restProps);
 };
-},{"react":"node_modules/react/index.js","./styles/booking":"src/components/booking/styles/booking.js"}],"src/components/placeOption/styles/placeOption.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/booking":"src/components/booking/styles/booking.js"}],"src/components/nextTrip/styles/nextTrip.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Button = exports.Wrapper = exports.Seat = exports.Date = exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.div``;
+exports.Container = Container;
+const Date = _styledComponents.default.span``;
+exports.Date = Date;
+const Seat = _styledComponents.default.span``;
+exports.Seat = Seat;
+const Wrapper = _styledComponents.default.div``;
+exports.Wrapper = Wrapper;
+const Button = _styledComponents.default.button``;
+exports.Button = Button;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/nextTrip/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = NextTrip;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _nextTrip = require("./styles/nextTrip");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function NextTrip({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTrip.Container, restProps, children);
+}
+
+NextTrip.Date = function NextTripDate({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTrip.Date, restProps, children);
+};
+
+NextTrip.Seat = function NextTripSeat({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTrip.Seat, restProps, children);
+};
+
+NextTrip.Wrapper = function NextTripWrapper({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTrip.Wrapper, restProps, children);
+};
+
+NextTrip.Button = function NextTripButton({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_nextTrip.Button, restProps, children);
+};
+},{"react":"node_modules/react/index.js","./styles/nextTrip":"src/components/nextTrip/styles/nextTrip.js"}],"src/components/placeOption/styles/placeOption.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38983,6 +39052,12 @@ Object.defineProperty(exports, "Booking", {
     return _booking.default;
   }
 });
+Object.defineProperty(exports, "NextTrip", {
+  enumerable: true,
+  get: function () {
+    return _nextTrip.default;
+  }
+});
 Object.defineProperty(exports, "PlaceOption", {
   enumerable: true,
   get: function () {
@@ -39006,6 +39081,8 @@ var _header = _interopRequireDefault(require("./header"));
 
 var _booking = _interopRequireDefault(require("./booking"));
 
+var _nextTrip = _interopRequireDefault(require("./nextTrip"));
+
 var _placeOption = _interopRequireDefault(require("./placeOption"));
 
 var _modal = _interopRequireDefault(require("./modal"));
@@ -39013,7 +39090,7 @@ var _modal = _interopRequireDefault(require("./modal"));
 var _account = _interopRequireDefault(require("./account"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js","./booking":"src/components/booking/index.js","./placeOption":"src/components/placeOption/index.js","./modal":"src/components/modal/index.js","./account":"src/components/account/index.js"}],"src/containers/Header.js":[function(require,module,exports) {
+},{"./header":"src/components/header/index.js","./booking":"src/components/booking/index.js","./nextTrip":"src/components/nextTrip/index.js","./placeOption":"src/components/placeOption/index.js","./modal":"src/components/modal/index.js","./account":"src/components/account/index.js"}],"src/containers/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57376,7 +57453,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = NextTrip;
+exports.default = NextTripContainer;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -57386,9 +57463,11 @@ var _reactRedux = require("react-redux");
 
 var _reactRouterDom = require("react-router-dom");
 
+var _components = require("../components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function NextTrip() {
+function NextTripContainer() {
   const allData = (0, _reactRedux.useSelector)(state => state.data);
   const {
     place
@@ -57406,16 +57485,16 @@ function NextTrip() {
     const hour = fullDate.getHours();
     const minute = fullDate.getMinutes();
     const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`;
-    return /*#__PURE__*/_react.default.createElement("div", {
+    return /*#__PURE__*/_react.default.createElement(_components.NextTrip, {
       key: data.id
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, day), /*#__PURE__*/_react.default.createElement("span", null, `${hour}:${minute}`)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, date), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, numberOfSeats), numberOfSeats > 0 ? "seats left" : "seat left")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, day), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, `${hour}:${minute}`)), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, date), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Seat, null, numberOfSeats), numberOfSeats > 0 ? "seats left" : "seat left")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: `/booking/${data.id}`
-    }, /*#__PURE__*/_react.default.createElement("button", {
+    }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Button, {
       disabled: numberOfSeats === 0
     }, "Book a seat")));
   }));
 }
-},{"react":"node_modules/react/index.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/actions/modal.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","date-fns":"node_modules/date-fns/esm/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js"}],"src/actions/modal.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
