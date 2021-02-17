@@ -64,6 +64,11 @@
 - `some()` methode is used in order to click a seat or cancel the selecting. `useDispatch()` is used to activate the action of a reducer and `useSelector()` is for grabbing a state from the store. 
 - When all booking are finished, the **add seat** button will display the modal and then the button check account in the modal brings us to the account page.
 
+### Account page
+
+- A few state are created in order to enable us to update the profile and activated the action in reducer.
+- After all of that, new array is created. This array specify the booking in each city name and the time.
+- The price is calculated by `reduce()`.
 
 ## Any further improvement:
 
