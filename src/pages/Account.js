@@ -162,7 +162,9 @@ export default function AccountContainer() {
     <Account>
       <Account.Heading style={{ fontWeight: "bold", fontSize: "64px" }}>
         My account{" "}
-        <Account.Span style={{ color: "#E53170", fontWeight: 300, fontSize:"64px" }}>
+        <Account.Span
+          style={{ color: "#E53170", fontWeight: 300, fontSize: "64px" }}
+        >
           {firstName}
         </Account.Span>
       </Account.Heading>
@@ -197,9 +199,13 @@ export default function AccountContainer() {
         </Account.Wrapper>
         <Account.Update>Update</Account.Update>
       </Account.Form>
-      <Account>
+      <Account
+        style={{ flexDirection: "column", paddingLeft: "0", paddingRight: "0" }}
+      >
         <Account.Title>My bookings:</Account.Title>
-        <Account.Wrapper style={{ flexDirection: "row" }}>
+        <Account.BookedPlace
+          style={{ display: "flex", flexDirection: "column", gap: "47px" }}
+        >
           {allBookedPlace.map((book, index) => {
             // Time converting
             const fullDate = new Date(book.time);
@@ -213,6 +219,8 @@ export default function AccountContainer() {
                 style={{
                   display: book.item.length === 0 && "none",
                   alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
                 }}
               >
                 <Account.Wrapper style={{ flexDirection: "column" }}>
@@ -229,7 +237,7 @@ export default function AccountContainer() {
               </Account.Wrapper>
             );
           })}
-        </Account.Wrapper>
+        </Account.BookedPlace>
       </Account>
     </Account>
   );

@@ -4,6 +4,10 @@ export const GlobalStyles = createGlobalStyle`body {
     margin: auto;
 }
 
+* {
+    font-family: 'Rubik', sans-serif;
+}
+
 ul {
     list-style: none;
     padding: 0;

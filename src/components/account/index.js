@@ -11,6 +11,7 @@ import {
   Span,
   Form,
   Text,
+  BookedPlace
 } from "./styles/account";
 
 export default function Account({ children, ...restProps }) {
@@ -19,6 +20,10 @@ export default function Account({ children, ...restProps }) {
 
 Account.Heading = function AccountHeading({ children, ...restProps }) {
   return <Heading {...restProps}>{children}</Heading>;
+};
+
+Account.BookedPlace = function AccountBookedPlace({ children, ...restProps }) {
+  return <BookedPlace {...restProps}>{children}</BookedPlace>;
 };
 
 Account.Form = function AccountForm({ children, ...restProps }) {

@@ -1,7 +1,18 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
-export const Heading = styled.h1``;
+export const Container = styled.div`
+  padding-left: 34px;
+  padding-right: 34px;
+  @media (min-width: 850px) {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 68px;
+    padding-right: 68px;
+  }
+`;
+export const Heading = styled.h1`
+  flex-basis: 100%;
+`;
 export const Input = styled.input`
   height: 44px;
   max-width: 444px;
@@ -23,6 +34,7 @@ export const Cancel = styled.button`
   text-transform: uppercase;
   border: none;
   color: #ffffff;
+  padding: 10px;
 `;
 export const Label = styled.label`
   display: flex;
@@ -44,10 +56,23 @@ export const Span = styled.span`
   font-size: 24px;
   line-height: 28px;
 `;
+
+export const BookedPlace = styled.div`
+  display: "flex";
+  flex-direction: "column";
+  gap: "47px";
+  @media (min-width: 850px) {
+    flex-basis: 50%;
+  }
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media (min-width: 850px) {
+    flex-basis: 50%;
+  }
 `;
 export const Text = styled.p`
   margin: 0;

@@ -12,6 +12,9 @@ import {
   Span,
   Price,
   Image,
+  Heading,
+  Content,
+  ImageList
 } from "./styles/booking";
 
 export default function Booking({ children, ...restProps }) {
@@ -20,6 +23,18 @@ export default function Booking({ children, ...restProps }) {
 
 Booking.Seats = function BookingSeats({ children, ...restProps }) {
   return <Seats {...restProps}>{children}</Seats>;
+};
+
+Booking.ImageList = function BookingImageList({ children, ...restProps }) {
+  return <ImageList {...restProps}>{children}</ImageList>;
+};
+
+Booking.Content = function BookingContent({ children, ...restProps }) {
+  return <Content {...restProps}>{children}</Content>;
+};
+
+Booking.Heading = function BookingHeading({ children, ...restProps }) {
+  return <Heading {...restProps}>{children}</Heading>;
 };
 
 Booking.ListItem = function BookingListItem({ children, ...restProps }) {

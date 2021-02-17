@@ -4,12 +4,14 @@ export const Container = styled.div`
   font-size: 36px;
   margin-top: 58px;
   margin-bottom: 58px;
-  /* max-width: calc(92px + 306px + 757px); */
-  /* margin: auto; */
-  @media (min-width: 600px) {
+  padding-left: 34px;
+  padding-right: 34px;
+  @media (min-width: 850px) {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-left: 68px;
+    padding-right: 68px;
   }
 `;
 

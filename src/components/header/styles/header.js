@@ -5,7 +5,13 @@ export const Container = styled.header`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #0F0E17;
+  background-color: #0f0e17;
+  padding-left: 34px;
+  padding-right: 34px;
+  @media (min-width: 850px) {
+    padding-left: 68px;
+    padding-right: 68px;
+  }
 `;
 export const Heading = styled.h1`
   font-size: 36px;

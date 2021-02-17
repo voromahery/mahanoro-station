@@ -44,9 +44,10 @@ export default function SeatBooking() {
       <Booking.Title>
         Book a seat to:<span>{bookingFind.destination}</span>
       </Booking.Title>
-      <Booking.Wrapper>
+      <Booking.Content>
+
         <Booking.Wrapper>
-          <Booking.Title>Pick a seat</Booking.Title>
+          <Booking.Heading>Pick a seat</Booking.Heading>
           <Booking.Seats>
             {bookingFind.seats.map((seat, index) => {
               // Changing the appearance of the chairsz
@@ -75,7 +76,7 @@ export default function SeatBooking() {
               }
 
               return (
-                <Booking.ListItem key={index}>
+                <Booking.ImageList key={index}>
                   {seat.isAvailable ? (
                     booked()
                   ) : (
@@ -85,12 +86,14 @@ export default function SeatBooking() {
                       alt=""
                     />
                   )}
-                </Booking.ListItem>
+                </Booking.ImageList>
               );
             })}
           </Booking.Seats>
-          <Booking.Wrapper>
-            <Booking.Title>Trip informations:</Booking.Title>
+          </Booking.Wrapper>
+
+          <Booking.Wrapper>  
+            <Booking.Heading>Trip informations:</Booking.Heading>
             <Booking.Info>
               <Booking.ListItem>
                 Departure time:
@@ -124,8 +127,7 @@ export default function SeatBooking() {
             </Booking.Button>
             <Booking.Total>Total: {price} Ar</Booking.Total>
           </Booking.Wrapper>
-        </Booking.Wrapper>
-      </Booking.Wrapper>
+      </Booking.Content>
     </Booking>
   );
 }
