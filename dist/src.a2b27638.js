@@ -39418,7 +39418,7 @@ var _components = require("../components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function PlaceOptionContainer() {
-  const places = (0, _reactRedux.useSelector)(state => state.places);
+  const places = ["Antananarivo", "Toamasina", "Vatomandry", "Moramanga"];
   return /*#__PURE__*/_react.default.createElement(_components.PlaceOption, null, /*#__PURE__*/_react.default.createElement(_components.PlaceOption.Heading, null, "Where are you going?"), /*#__PURE__*/_react.default.createElement(_components.PlaceOption.List, null, places.map((place, index) => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     key: place[index],
     to: `/nextTrip/${place}`
@@ -58235,7 +58235,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58057" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49894" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

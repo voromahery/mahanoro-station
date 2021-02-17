@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { PlaceOption } from "../components";
 
 export default function PlaceOptionContainer() {
-  const places = useSelector((state) => state.places);
+  const places = ["Antananarivo", "Toamasina", "Vatomandry", "Moramanga"];
 
   return (
     <PlaceOption>
