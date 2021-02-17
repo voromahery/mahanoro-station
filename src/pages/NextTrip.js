@@ -11,9 +11,9 @@ export default function NextTripContainer() {
 
   return (
     <>
-      <h1>
-        Next trips to:<span>{place}</span>
-      </h1>
+      <NextTrip.Header>
+        Next trips to:<NextTrip.Place >{place}</NextTrip.Place>
+      </NextTrip.Header>
       {dataFilter.map((data) => {
         // Get the number of the available seats
         const seats = data.seats.filter((seat) => seat.isAvailable === true);
@@ -28,7 +28,7 @@ export default function NextTripContainer() {
         return (
           <NextTrip key={data.id}>
             <NextTrip.Wrapper>
-              <NextTrip.Date>{day}</NextTrip.Date>
+              <NextTrip.Date>{day}</NextTrip.Date><br/>
               <NextTrip.Date>{`${hour}:${minute}`}</NextTrip.Date>
             </NextTrip.Wrapper>
             <NextTrip.Wrapper>

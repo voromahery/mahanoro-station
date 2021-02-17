@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { Account } from "../components";
 import { user } from "../actions/user";
 import { cancelBooking } from "../actions/booking";
+import displayModal from "./../reducer/modalReducer";
 
 export default function AccountContainer() {
   const dispatch = useDispatch();
@@ -157,12 +158,13 @@ export default function AccountContainer() {
     console.log(bookingId, filterBooking);
   }
 
-
-  
   return (
     <Account>
-      <Account.Heading>
-        My account <Account.Span>{firstName}</Account.Span>
+      <Account.Heading style={{ fontWeight: "bold", fontSize: "64px" }}>
+        My account{" "}
+        <Account.Span style={{ color: "#E53170", fontWeight: 300, fontSize:"64px" }}>
+          {firstName}
+        </Account.Span>
       </Account.Heading>
       <Account.Form onSubmit={updateUser}>
         <Account.Wrapper
@@ -197,7 +199,7 @@ export default function AccountContainer() {
       </Account.Form>
       <Account>
         <Account.Title>My bookings:</Account.Title>
-        <Account.Wrapper>
+        <Account.Wrapper style={{ flexDirection: "row" }}>
           {allBookedPlace.map((book, index) => {
             // Time converting
             const fullDate = new Date(book.time);
@@ -205,21 +207,26 @@ export default function AccountContainer() {
             const minute = fullDate.getMinutes();
             const date = `${format(fullDate, "dd/MM/yyyy")}`;
             return (
-              <div
+              <Account.Wrapper
                 id={book.id}
                 key={index}
-                style={{ display: book.item.length === 0 && "none" }}
+                style={{
+                  display: book.item.length === 0 && "none",
+                  alignItems: "center",
+                }}
               >
-                <Account.Text>{book.destination}</Account.Text>
-                <Account.Text>{`${date}, ${hour}:${minute}`}</Account.Text>
-                <Account.Wrapper>
+                <Account.Wrapper style={{ flexDirection: "column" }}>
+                  <Account.Text>{book.destination}</Account.Text>
+                  <Account.Text>{`${date}, ${hour}:${minute}`}</Account.Text>
+                </Account.Wrapper>
+                <Account.Wrapper style={{ flexDirection: "column" }}>
                   <Account.Text>{book.item.length} seats</Account.Text>
                   <Account.Text>{book.price} Ar</Account.Text>
                 </Account.Wrapper>
                 <Account.Cancel value={book.id} onClick={cancelBooking}>
                   Cancel
                 </Account.Cancel>
-              </div>
+              </Account.Wrapper>
             );
           })}
         </Account.Wrapper>

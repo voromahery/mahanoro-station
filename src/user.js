@@ -2,8 +2,8 @@ export default {
   // places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
   displayModal: false,
   user: {
-    firstName: "Fabrice",
-    lastName: "Daniel",
+    firstName: "Kaneki",
+    lastName: "Ken",
     phone: "0342364876",
     bookedPlace: [],
   },

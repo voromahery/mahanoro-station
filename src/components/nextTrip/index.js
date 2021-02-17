@@ -4,7 +4,9 @@ import React from "react";
    Date,
    Wrapper,
    Button,
-   Seat
+   Seat,
+   Place,
+   Header
  } from "./styles/nextTrip";
 
 export default function NextTrip({ children, ...restProps }) {
@@ -17,6 +19,14 @@ NextTrip.Date = function NextTripDate({ children, ...restProps }) {
 
 NextTrip.Seat = function NextTripSeat({ children, ...restProps }) {
   return <Seat {...restProps}>{children}</Seat>;
+};
+
+NextTrip.Header = function NextTripHeader({ children, ...restProps }) {
+  return <Header {...restProps}>{children}</Header>;
+};
+
+NextTrip.Place = function NextTripPlace({ children, ...restProps }) {
+  return <Place {...restProps}>{children}</Place>;
 };
 
 NextTrip.Wrapper = function NextTripWrapper({
