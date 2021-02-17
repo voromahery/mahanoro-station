@@ -228,8 +228,12 @@ export default function AccountContainer() {
                   <Account.Text>{`${date}, ${hour}:${minute}`}</Account.Text>
                 </Account.Wrapper>
                 <Account.Wrapper style={{ flexDirection: "column" }}>
-                  <Account.Text>{book.item.length} seats</Account.Text>
-                  <Account.Text>{book.price} Ar</Account.Text>
+                  <Account.Text style={{ marginLeft: "20px" }}>
+                    {book.item.length} seats
+                  </Account.Text>
+                  <Account.Text style={{ marginLeft: "20px" }}>
+                    {book.price} Ar
+                  </Account.Text>
                 </Account.Wrapper>
                 <Account.Cancel value={book.id} onClick={cancelBooking}>
                   Cancel

@@ -1,9 +1,10 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { PlaceOption } from "../components";
 
 export default function PlaceOptionContainer() {
-  const places = ["Antananarivo", "Moramanga", "Vatomandry", "Toamasina"];
+  const places = useSelector((state) => state.places);
 
   return (
     <PlaceOption>

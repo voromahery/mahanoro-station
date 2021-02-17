@@ -38279,7 +38279,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _default = {
-  // places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
+  places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
   displayModal: false,
   user: {
     firstName: "Kaneki",
@@ -39174,7 +39174,8 @@ const Form = _styledComponents.default.form`
 `;
 exports.Form = Form;
 const Text = _styledComponents.default.p`
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
@@ -39408,6 +39409,8 @@ exports.default = PlaceOptionContainer;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reactRedux = require("react-redux");
+
 var _reactRouterDom = require("react-router-dom");
 
 var _components = require("../components");
@@ -39415,7 +39418,7 @@ var _components = require("../components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function PlaceOptionContainer() {
-  const places = ["Antananarivo", "Moramanga", "Vatomandry", "Toamasina"];
+  const places = (0, _reactRedux.useSelector)(state => state.places);
   return /*#__PURE__*/_react.default.createElement(_components.PlaceOption, null, /*#__PURE__*/_react.default.createElement(_components.PlaceOption.Heading, null, "Where are you going?"), /*#__PURE__*/_react.default.createElement(_components.PlaceOption.List, null, places.map((place, index) => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     key: place[index],
     to: `/nextTrip/${place}`
@@ -39423,7 +39426,7 @@ function PlaceOptionContainer() {
     value: place
   }, place))))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58126,7 +58129,15 @@ function AccountContainer() {
       style: {
         flexDirection: "column"
       }
-    }, /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.item.length, " seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, null, book.price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, {
+    }, /*#__PURE__*/_react.default.createElement(_components.Account.Text, {
+      style: {
+        marginLeft: "20px"
+      }
+    }, book.item.length, " seats"), /*#__PURE__*/_react.default.createElement(_components.Account.Text, {
+      style: {
+        marginLeft: "20px"
+      }
+    }, book.price, " Ar")), /*#__PURE__*/_react.default.createElement(_components.Account.Cancel, {
       value: book.id,
       onClick: cancelBooking
     }, "Cancel"));
@@ -58224,7 +58235,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55786" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58057" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

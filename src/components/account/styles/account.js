@@ -10,15 +10,18 @@ export const Container = styled.div`
     padding-right: 68px;
   }
 `;
+
 export const Heading = styled.h1`
   flex-basis: 100%;
 `;
+
 export const Input = styled.input`
   height: 44px;
   max-width: 444px;
   background: #000000;
   color: #ff8906;
 `;
+
 export const Update = styled.button`
   padding-top: 16px;
   padding-bottom: 16px;
@@ -29,6 +32,7 @@ export const Update = styled.button`
   color: #ffffff;
   border: none;
 `;
+
 export const Cancel = styled.button`
   background: #ff8906;
   text-transform: uppercase;
@@ -36,10 +40,12 @@ export const Cancel = styled.button`
   color: #ffffff;
   padding: 10px;
 `;
+
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
 `;
+
 export const Title = styled.h3`
   font-weight: 500;
   font-size: 24px;
@@ -74,8 +80,10 @@ export const Form = styled.form`
     flex-basis: 50%;
   }
 `;
+
 export const Text = styled.p`
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;

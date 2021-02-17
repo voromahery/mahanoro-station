@@ -1,38 +1,107 @@
-# Graded Project - Mahanoro Station
+<h1 align="center">{Mahanoro station}</h1>
 
-![Design preview for the Mahanoro station coding challenge](./design/1.png)
+<div align="center">
+  <h3>
+    <a href="https://mahanoro-station-daniel.netlify.app/">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://github.com/voromahery/mahanoro-station">
+      Solution
+    </a>
+  </h3>
+</div>
 
-## The challenge
+<!-- TABLE OF CONTENTS -->
 
-Your challenge is to build out this app and get it working with **redux**, **compound components** and **styled components**, while making it look as close to the design as possible.
+## Table of Contents
 
-This is a website that will allow us to reserve some seats in _"Taxi brousses"_ departing from Mahanoro station.
+- [Overview](#overview)
+  - [Built With](#built-with)
+- [Features](#features)
+- [How to use](#how-to-use)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
-Your users should be able to:
+<!-- OVERVIEW -->
 
-- Pick a city from the city list
-- See the available trips to that city, and pick one where seats are still availalable
-- Select one or more seats in the car, and see how much it's going to cost
-- Confirm the booking
-- See their confirmed bookings on the 'My account'page
-- Modify their own information, like name or phone number, on that same page.
+## Overview
 
-## Where to find everything
+![screenshot]()
 
-Your task is to build out the project to the designs from this Figma link: https://www.figma.com/file/6gSAJpaedebKAUuaM4ekFR/Mahanoro-Station?node-id=4%3A38
+- Feel free to visit my demo at [https://mahanoro-station-daniel.netlify.app/](https://mahanoro-station-daniel.netlify.app/)
 
-The data from the trips are available on this link : https://gist.githubusercontent.com/Pinois/36bb5fbf9b6a686f0baf4006dd137bca/raw/a40d8b3f696a75f388db286d57bdd05a925fa0e7/trips.json
+## My experience
 
-## Building your project
+- I was struggle to deal with selecting the seats and activate the cancel buttons in the account page.
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+## Structure of the code
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). This will make it easier to share your code with the community if you need some help. If you're not sure how to do this, [have a read through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a URL. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, but I recommend you to use **Netlify**.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead how your data and reducers will look like.
+- First, I created an HTML in which I created the root then, grabbed the root and put it in index.js. After that, I created some JSX in the App component then, I wrapped the App inside the `Router`. In the App component, I put some component which wrapped by `Path` and the block of path are wrapped by `Switch` in order to allow us to go in different pages.
 
-## Submit your project
+- Secondly, I created a local store stored in store folder, so that it is possible to update all about the user, to toggle the modal. I created actions which are stored in a folder called action and linked them with reducers in a folder called reducers.
 
-You have until **Tuesday** at **15h30** to submit your github link and netlify link on this form : https://forms.gle/ikBWC2MokmdH4jdw6
+- In the next step, I created a store and stored it via `Provider` in order to let us be able to get the data stored in the store everywhere.
 
-**Have fun building!** 🚀
+### Place option page (first page)
+
+- I created an array of four cities in the local store and then I mapped them.
+- All of those buttons are stored in `Link` and `useParams()`, which is a component from `react-router-dom`, in order to let us navigate to the **Next trip** page according to the city name. 
+
+### Next trip page (second page)
+
+- The datas in one city are mapped in order to list them all. The buttons are wrapped by `Link` and `useParams()` is also used in order to navigate to the **Seat booking page**.  
+
+
+### Booking page (third page)
+
+- All seats are mapped. The available seat are clickable whereas the unavailable ones are disabled and have red background.
+- `some()` methode is used in order to click a seat or cancel the selecting. `useDispatch()` is used to activate the action of a reducer and `useSelector()` is for grabbing a state from the store. 
+- When all booking are finished, the **add seat** button will display the modal and then the button check account in the modal brings us to the account page.
+
+
+## Any further improvement:
+
+- If I had more time, I would style my work the same in the design and improve other functionalities.
+
+## Knowledge acquired
+
+- I improved my skill by using **Redux** and **Redux hook**. Not only that but it reminds me of using `reduce()` in order to calculate the price of the bookings.
+
+## Challenging part
+
+- For me, the most challenging part is choosing the seat and activate the **cancel** button in the account page
+
+### Built With
+
+- [Redux](https://reduxjs.org/);
+
+## Features
+
+- [Redux](https://reduxjs.org/)
+
+## How To Use
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/your-user-name/your-project-name
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
+```
+
+## Acknowledgements
+
+- [date-fns](https://www.npmjs.com/package/date-fns)
+
+- [React](https://reactjs.org/docs/dom-elements.html)
+
+## Contact
+
+- Website [Daniel-website](https://portfolio-onja-daniel.netlify.app/)
+- GitHub [@voromahery](https://github.com/voromahery/github-jobs)
