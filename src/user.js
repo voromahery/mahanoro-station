@@ -1,5 +1,5 @@
 export default {
-  places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
+  // places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
   displayModal: false,
   user: {
     firstName: "Kaneki",

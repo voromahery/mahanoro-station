@@ -38279,7 +38279,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _default = {
-  places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
+  // places: ["Antananarivo", "Toamasina", "Vatomandry", "Toamasina"],
   displayModal: false,
   user: {
     firstName: "Kaneki",
@@ -57949,12 +57949,6 @@ var _components = require("../components");
 
 var _user = require("../actions/user");
 
-var _booking = require("../actions/booking");
-
-var _modalReducer = _interopRequireDefault(require("./../reducer/modalReducer"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -58143,7 +58137,7 @@ function AccountContainer() {
     }, "Cancel"));
   }))));
 }
-},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/user":"src/actions/user.js","../actions/booking":"src/actions/booking.js","./../reducer/modalReducer":"src/reducer/modalReducer.js"}],"src/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../actions/user":"src/actions/user.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

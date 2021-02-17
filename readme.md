@@ -21,13 +21,18 @@
 - [Features](#features)
 - [How to use](#how-to-use)
 - [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
 
 <!-- OVERVIEW -->
 
 ## Overview
 
-![screenshot]()
+![screenshot](./screenshot/home.png)
+
+![screenshot](./screenshot/next-trip.png)
+
+![screenshot](./screenshot/seats-selecting.png)
+
+![screenshot](./screenshot/account.png)
 
 - Feel free to visit my demo at [https://mahanoro-station-daniel.netlify.app/](https://mahanoro-station-daniel.netlify.app/)
 
@@ -74,11 +79,12 @@
 
 ### Built With
 
-- [Redux](https://reduxjs.org/);
+- [Redux](https://react-redux.js.org/);
 
 ## Features
 
-- [Redux](https://reduxjs.org/)
+- [styled component](https://styled-components.com/)
+- [Redux](https://react-redux.js.org/)
 
 ## How To Use
 
@@ -95,13 +101,7 @@ $ npm install
 $ npm start
 ```
 
-## Acknowledgements
-
-- [date-fns](https://www.npmjs.com/package/date-fns)
-
-- [React](https://reactjs.org/docs/dom-elements.html)
-
 ## Contact
 
 - Website [Daniel-website](https://portfolio-onja-daniel.netlify.app/)
-- GitHub [@voromahery](https://github.com/voromahery/github-jobs)
+- GitHub [@voromahery](https://github.com/voromahery)

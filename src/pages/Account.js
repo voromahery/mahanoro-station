@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
 import { Account } from "../components";
 import { user } from "../actions/user";
-import { cancelBooking } from "../actions/booking";
-import displayModal from "./../reducer/modalReducer";
 
 export default function AccountContainer() {
   const dispatch = useDispatch();
