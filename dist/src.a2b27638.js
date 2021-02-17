@@ -38526,24 +38526,57 @@ const Seats = _styledComponents.default.ul`
   grid-gap: 12px;
 `;
 exports.Seats = Seats;
-const ListItem = _styledComponents.default.li``;
+const ListItem = _styledComponents.default.li`
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #94989b;
+`;
 exports.ListItem = ListItem;
-const Title = _styledComponents.default.h3``;
+const Title = _styledComponents.default.h3`
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 76px;
+  color: #000000;
+`;
 exports.Title = Title;
-const Info = _styledComponents.default.ul``; // export const InfoItem=styled.li;
-
+const Info = _styledComponents.default.ul``;
 exports.Info = Info;
-const Button = _styledComponents.default.button``;
+const Button = _styledComponents.default.button`
+  background: #e53170;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: #ffffff;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  border: none;
+`;
 exports.Button = Button;
-const ButtonSpan = _styledComponents.default.span``;
+const ButtonSpan = _styledComponents.default.span`
+  color: #ff8906;
+`;
 exports.ButtonSpan = ButtonSpan;
-const Total = _styledComponents.default.p``;
+const Total = _styledComponents.default.p`
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  text-transform: uppercase;
+  color: #000000;
+`;
 exports.Total = Total;
 const Wrapper = _styledComponents.default.div``;
 exports.Wrapper = Wrapper;
-const Price = _styledComponents.default.div``;
+const Price = _styledComponents.default.div`
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 57px;
+  color: #ff8906;
+`;
 exports.Price = Price;
-const Span = _styledComponents.default.span``;
+const Span = _styledComponents.default.span`
+  color: #000000;
+`;
 exports.Span = Span;
 const Image = _styledComponents.default.img``;
 exports.Image = Image;
@@ -38667,7 +38700,7 @@ const Container = _styledComponents.default.div`
   margin-bottom: 58px;
   /* max-width: calc(92px + 306px + 757px); */
   /* margin: auto; */
-   @media (min-width: 600px) {
+  @media (min-width: 600px) {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -38703,6 +38736,14 @@ const Button = _styledComponents.default.button`
   padding-bottom: 25px;
   padding-right: 61px;
   padding-left: 61px;
+  &:disabled {
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.7)
+      ),
+      #e53170;
+  }
 `;
 exports.Button = Button;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/nextTrip/index.js":[function(require,module,exports) {
@@ -38873,18 +38914,44 @@ const Container = _styledComponents.default.div`
 exports.Container = Container;
 const Wrapper = _styledComponents.default.div`
   border: 5px solid #e53170;
+  text-align: center;
   background-color: #ffffff;
   top: 30%;
   z-index: 2;
+  padding: 48px;
+  max-width: 500px;
+  margin: auto;
 `;
 exports.Wrapper = Wrapper;
-const Heading = _styledComponents.default.h1``;
+const Heading = _styledComponents.default.h1`
+  font-size: 36px;
+  line-height: 43px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+`;
 exports.Heading = Heading;
-const Paragraph = _styledComponents.default.p``;
+const Paragraph = _styledComponents.default.p`
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+`;
 exports.Paragraph = Paragraph;
-const Close = _styledComponents.default.button``;
+const Close = _styledComponents.default.button`
+  text-align: right;
+  max-width: fit-content;
+  margin-left: auto;
+`;
 exports.Close = Close;
-const Button = _styledComponents.default.button``;
+const Button = _styledComponents.default.button`
+  background: #e53170;
+  color: #ffffff;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-right: 27px;
+  padding-left: 27px;
+  border: none;
+`;
 exports.Button = Button;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/modal/index.js":[function(require,module,exports) {
 "use strict";
@@ -57565,7 +57632,11 @@ function NextTripContainer() {
     const date = `${(0, _dateFns.format)(fullDate, "dd/MM/yyyy")}`;
     return /*#__PURE__*/_react.default.createElement(_components.NextTrip, {
       key: data.id
-    }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, day), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, `${hour}:${minute}`)), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, date), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Seat, null, numberOfSeats), numberOfSeats > 0 ? "seats left" : "seat left")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, {
+      style: {
+        flexDirection: "column"
+      }
+    }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, day), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, `${hour}:${minute}`)), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Date, null, date), /*#__PURE__*/_react.default.createElement(_components.NextTrip.Wrapper, null, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Seat, null, numberOfSeats), numberOfSeats > 0 ? "seats left" : "seat left")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: `/booking/${data.id}`
     }, /*#__PURE__*/_react.default.createElement(_components.NextTrip.Button, {
       disabled: numberOfSeats === 0
@@ -58040,7 +58111,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53553" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55786" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

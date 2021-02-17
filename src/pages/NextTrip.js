@@ -27,8 +27,8 @@ export default function NextTripContainer() {
         const date = `${format(fullDate, "dd/MM/yyyy")}`;
         return (
           <NextTrip key={data.id}>
-            <NextTrip.Wrapper>
-              <NextTrip.Date>{day}</NextTrip.Date><br/>
+            <NextTrip.Wrapper style={{flexDirection: "column"}}>
+              <NextTrip.Date>{day}</NextTrip.Date>
               <NextTrip.Date>{`${hour}:${minute}`}</NextTrip.Date>
             </NextTrip.Wrapper>
             <NextTrip.Wrapper>

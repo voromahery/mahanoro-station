@@ -6,7 +6,7 @@ export const Container = styled.div`
   margin-bottom: 58px;
   /* max-width: calc(92px + 306px + 757px); */
   /* margin: auto; */
-   @media (min-width: 600px) {
+  @media (min-width: 600px) {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -42,4 +42,12 @@ export const Button = styled.button`
   padding-bottom: 25px;
   padding-right: 61px;
   padding-left: 61px;
+  &:disabled {
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.7)
+      ),
+      #e53170;
+  }
 `;
